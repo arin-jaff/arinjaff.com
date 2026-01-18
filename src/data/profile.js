@@ -6,13 +6,13 @@ export const profile = {
   phone: "(425) 229-1603",
   github: "https://github.com/arin-jaff",
   linkedin: "https://www.linkedin.com/in/arin-jaff-252977251/",
-  headshot: "/photo.jpg",
+  headshot: "/Arin_Headshot.jpeg",
   title: "Computer Science Student & Software Engineer",
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",
     degree: "B.S. Computer Science",
-    gpa: "3.77/4.00"
+    gpa: "3.80/4.00"
   },
   experience: [
     {
