@@ -1,8 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;500;600;700&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* small utility for subtle card shadow */
-.card {
-  @apply bg-white rounded-2xl shadow-sm;
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded shadow-card border border-gray-200 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply hover:shadow-card-hover hover:border-gray-300;
+  }
+
+  .btn-primary {
+    @apply px-5 py-2.5 bg-brand-500 text-white rounded font-medium
+           transition-all duration-200 hover:bg-brand-600
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply px-5 py-2.5 bg-white text-brand-500 rounded font-medium
+           border border-gray-300 transition-all duration-200
+           hover:bg-gray-50 hover:border-gray-400
+           focus:outline-none focus:ring-2 focus:ring-brand-500 focus:ring-offset-2;
+  }
+
+  .section-title {
+    @apply text-2xl font-semibold text-brand-500 tracking-tight;
+  }
+
+  .text-muted {
+    @apply text-gray-500;
+  }
+}
+
+@layer utilities {
+  .gradient-subtle {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  }
 }
