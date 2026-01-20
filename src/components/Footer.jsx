@@ -9,9 +9,10 @@ export default function Footer() {
       <div className="max-w-5xl mx-auto px-6 py-8">
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="text-sm text-gray-500">
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+
           </div>
           <div className="flex items-center gap-4">
+            View more about me!
             <a
               href={profile.github}
               target="_blank"

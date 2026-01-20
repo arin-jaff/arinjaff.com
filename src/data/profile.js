@@ -65,7 +65,8 @@ export const profile = {
       title: "Strava Activity Visualizer",
       tagline: "Interactive heatmap of personal athletics",
       thumb: "/strava_logo.png",
-      url: "https://your-deployed-strava-app.com", 
+      url: "https://stravavisualizer.arinjaff.com", 
+      github: "https://github.com/arin-jaff/strava-visualizer",
       description:
         "A React application integrating the Strava API to fetch athlete activities, decode polyline geodata, and render interactive heatmaps using Leaflet."
     },
@@ -103,13 +104,13 @@ export const profile = {
     },
     {
       id: "ctrl-alt-drive",
-      title: "ctrl-alt-drive",
-      tagline: "Hackign 4 Defense Project on National Guard Vehicle Readiness. Proposal was successful, and is currently moving forward through legislative process!",
+      title: "CTRL-ALT-DRIVE",
+      tagline: "Hacking 4 Defense Project on National Guard Vehicle Readiness.",
       thumb: "/wheels_logo.jpeg",
       github: "https://github.com/alexakfk/ctrl-alt-drive",
       pdfLink: "/WheelsOfReadiness.pdf",
       description:
-        "WheelsOfReadiness - A legislative proposal addressing autonomous vehicle policy and infrastructure readiness."
+        "Two part project including a full tech stack webapp for vehicle readiness tracking and a strategic report for the National Guard on improving vehicle maintenance processes.  Proposal was successful, and is currently moving forward through legislative process!"
     }
   ],
   skills: {
