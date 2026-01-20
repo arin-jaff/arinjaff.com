@@ -12,8 +12,8 @@ export const profile = {
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",
-    degree: "B.S. Computer Science",
-    gpa: "3.77/4.00",
+    degree: "Bachelor's Degree, Computer Science",
+    gpa: "3.79/4.00",
     honors: ["Men's Varsity Crew", "Dean's List"],
     coursework: ["Machine Learning", "Artificial Intelligence", "Analysis of Algorithms", "Natural Language Processing", "Computer Networks", "Cloud Computing", "Hacking 4 Defense", "Large Language Models", "Ethical and Responsible AI", "Foundations and Ethics of LLMs"]
   },
