@@ -61,6 +61,15 @@ export const profile = {
   ],
   projects: [
     {
+      id: "strava-viz",
+      title: "Strava Activity Visualizer",
+      tagline: "Interactive heatmap of personal athletics",
+      thumb: "/projects/strava_logo.png",
+      url: "https://your-deployed-strava-app.com", 
+      description:
+        "A React application integrating the Strava API to fetch athlete activities, decode polyline geodata, and render interactive heatmaps using Leaflet."
+    },
+    {
       id: "ergroom",
       title: "Who's In the Erg Room?",
       tagline: "Real-time erg room occupancy tracker",
