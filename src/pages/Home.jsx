@@ -85,10 +85,10 @@ export default function Home() {
           >
             <h2 className="text-xl font-semibold text-brand-500">About Me</h2>
             <p className="mt-4 text-gray-600 leading-relaxed">
-              I am a Software Engineer with experience building cloud services and full-stack
-              products. I enjoy designing scalable projects that solve real-world problems. I plan on 
+              I am a Computer Scientist and Software Engineer with experience building cloud services and full-stack
+              enterprise applications. I enjoy designing scalable systems that solve real-world problems. I plan on 
               working at Garmin in 2026 as a Software Engineer, and currently
-              I am a Computer Science student at Columbia University, where I am focusing in
+              I am a Computer Science student at Columbia University, where I am focusing on
               machine learning, artificial intelligence, and cloud computing. I am working on several
               personal projects, including <a href="https://ergroom.arinjaff.com" target="_blank" rel="noreferrer" className="text-accent-600 hover:text-accent-500 font-medium">Who's in the Erg Room?</a> - 
               an online web-tracker for Columbia Lightweight Rowing which uses a Raspberry Pi, RFID module, and a Flask application to show real-time erg room occupancy. Check out my other projects and prior experience!
