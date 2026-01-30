@@ -6,14 +6,14 @@ export const profile = {
   phone: "(425) 229-1603",
   github: "https://github.com/arin-jaff",
   linkedin: "https://www.linkedin.com/in/arin-jaff-252977251/",
-  headshot: "/personal_photo.jpg",
+  headshot: "/headshot.jpeg",
   resume: "/Jaff, Arin - Resume.pdf",
   title: "Computer Science Student & Software Engineer",
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",
     degree: "Bachelor's Degree, Computer Science",
-    gpa: "3.79/4.00",
+    gpa: "3.80/4.00",
     honors: ["Men's Varsity Crew", "Dean's List"],
     coursework: ["Machine Learning", "Artificial Intelligence", "Analysis of Algorithms", "Natural Language Processing", "Computer Networks", "Cloud Computing", "Hacking 4 Defense", "Large Language Models", "Ethical and Responsible AI", "Foundations and Ethics of LLMs"]
   },

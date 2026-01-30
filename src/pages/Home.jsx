@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import githubLogo from "../assets/github_logo.png";
 import linkedinLogo from "../assets/linkedin_logo.png";
 import ergroomLogo from "../assets/ergroom_logo.png";
+import wahooHenley from "../assets/WahooHenley.jpeg";
 
 export default function Home() {
   return (
@@ -104,6 +105,51 @@ export default function Home() {
             </div>
           </motion.div>
 
+          {/* Athletics Card */}
+          <motion.div
+            className="card p-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.3 }}
+          >
+            <h2 className="text-xl font-semibold text-brand-500 flex items-center gap-2">
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+              </svg>
+              Athletics
+            </h2>
+            <div className="mt-4 grid md:grid-cols-2 gap-6 items-center">
+              <div>
+                <p className="text-gray-600 leading-relaxed">
+                  I am a <span className="font-semibold text-brand-500">D1 athlete</span> competing for the{" "}
+                  <span className="font-semibold">Columbia Lightweight Rowing team</span>. I was a part of the 2V8 crew which earned{" "}
+                  <span className="font-semibold text-accent-600">bronze at the 2025 IRA National Championships</span>,
+                  representing the culmination of our team's dedication and hard work. As a part of the 1V this year, we recently won 
+                   <span className="font-semibold text-accent-600"> Wahoo Henley</span> hosted by UVA Men's Rowing.,
+                </p>
+                <a
+                  href="https://gocolumbialions.com/news/2025/6/1/general-lightweight-2v8-crew-earns-bronze-on-final-day-of-ira-national-championships"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 mt-4 text-sm text-accent-600 hover:text-accent-500 font-medium transition-colors"
+                >
+                  Read the press release
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </a>
+              </div>
+              <div>
+                <img
+                  src={wahooHenley}
+                  alt="Columbia Lightweight Rowing team at Henley Royal Regatta"
+                  className="rounded-lg shadow-soft border border-gray-200 w-full object-cover"
+                />
+                <p className="text-xs text-gray-500 mt-2 text-center">Team at Henley Royal Regatta</p>
+              </div>
+            </div>
+          </motion.div>
+
             {/* Highlights */}
             <div className="grid sm:grid-cols-2 gap-4">
             {/* Current Role: Columbia TA */}
@@ -111,7 +157,7 @@ export default function Home() {
                 className="card p-6 card-hover"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.5, delay: 0.45 }}
             >
                 <h3 className="font-semibold text-brand-500 flex items-center gap-2">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -146,7 +192,7 @@ export default function Home() {
             className="card p-6"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.5, delay: 0.6 }}
           >
             <h3 className="font-semibold text-brand-500 flex items-center gap-2">
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
