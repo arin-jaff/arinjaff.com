@@ -92,7 +92,7 @@ export default function Home() {
               working at Garmin in 2026 as a Software Engineer, and currently
               I am a Computer Science student at Columbia University, where I am focusing on
               machine learning, artificial intelligence, and cloud computing. I am working on several
-              personal projects, including <a href="https://ergroom.arinjaff.com" target="_blank" rel="noreferrer" className="text-accent-600 hover:text-accent-500 font-medium">Who's in the Erg Room?</a> - 
+              projects, including <a href="https://ergroom.arinjaff.com" target="_blank" rel="noreferrer" className="text-accent-600 hover:text-accent-500 font-medium">Who's in the Erg Room?</a> - 
               an online web-tracker for Columbia Lightweight Rowing which uses a Raspberry Pi, RFID module, and a Flask application to show real-time erg room occupancy. Check out my other projects and prior experience!
             </p>
 

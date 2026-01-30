@@ -48,7 +48,7 @@ export default function Skills() {
         transition={{ duration: 0.5 }}
       >
         <h2 className="section-title mb-2">Technical Skills</h2>
-        <p className="text-gray-500 mb-8">Skills and proficiencies developed through coursework, internships, and personal projects</p>
+        <p className="text-gray-500 mb-8">Skills and proficiencies developed through coursework, internships, and application development.</p>
       </motion.div>
 
       {/* Introduction */}
@@ -60,7 +60,7 @@ export default function Skills() {
       >
         <p className="text-gray-600 leading-relaxed">
           My technical skills have been developed through rigorous Computer Science coursework at Columbia University,
-          hands-on experience in software engineering internships at Garmin and Covet, and various personal projects.
+          hands-on experience in software engineering internships at Garmin and Covet, and through developing several applications.
           I have gained expertise in full-stack development, cloud computing, and AI/ML through both academic study and
           real-world application building production systems.
         </p>
