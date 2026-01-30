@@ -35,7 +35,7 @@ export default function ProjectCard({ project, index }) {
           {project.title}
         </h3>
         <p className="text-sm text-gray-500 mt-1">{project.tagline}</p>
-        <p className="text-sm text-gray-600 mt-3 line-clamp-2">{project.description}</p>
+        <p className="text-sm text-gray-600 mt-3 line-clamp-3">{project.description}</p>
 
         <div className="mt-4 flex items-center gap-3 flex-wrap">
           {/* Live URL if available */}

@@ -6,6 +6,7 @@ import githubLogo from "../assets/github_logo.png";
 import linkedinLogo from "../assets/linkedin_logo.png";
 import ergroomLogo from "../assets/ergroom_logo.png";
 import wahooHenley from "../assets/WahooHenley.jpeg";
+import oarsIcon from "../assets/oars.png";
 
 export default function Home() {
   return (
@@ -113,9 +114,7 @@ export default function Home() {
             transition={{ duration: 0.5, delay: 0.3 }}
           >
             <h2 className="text-xl font-semibold text-brand-500 flex items-center gap-2">
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
-              </svg>
+              <img src={oarsIcon} alt="Rowing Oars" className="w-5 h-5" />
               Athletics
             </h2>
             <div className="mt-4 grid md:grid-cols-2 gap-6 items-center">

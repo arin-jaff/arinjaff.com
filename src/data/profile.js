@@ -78,7 +78,7 @@ export const profile = {
       url: "https://ergroom.arinjaff.com",
       github: "https://github.com/arin-jaff/erg-room",
       description:
-        "Real-time tracking system for erg room occupancy, helping athletes plan their workouts efficiently."
+        "Real-time tracking system for erg room occupancy, helping athletes plan their workouts efficiently. *Currently working with Columbia IT to integrate with campus ethernet for better performance.*"
     },
     {
       id: "pokebank",
@@ -136,16 +136,16 @@ export const profile = {
         { text: "Maintained 4.0+ GPA while managing 40+ hr/week athletic time commitment" }
       ]
     },
-    openSource: {
-      title: "Open Source Contributions",
-      icon: "code",
-      description: "Passionate about contributing to open source projects, particularly in sports analytics and scientific computing.",
-      items: [
-        { text: "Projects:" },
-        { text: "Contributions to Tidal, a live coding music environment", link: { url: "https://codeberg.org/uzu/tidal", label: "Tidal" } },
-        { text: "Floodlight Sports Analytics", link: { url: "https://github.com/floodlight-sports/floodlight", label: "floodlight" } }
-      ]
-    },
+    // openSource: {
+    //   title: "Open Source Contributions",
+    //   icon: "code",
+    //   description: "Passionate about contributing to open source projects, particularly in sports analytics and scientific computing.",
+    //   items: [
+    //     { text: "Projects:" },
+    //     { text: "Contributions to Tidal, a live coding music environment", link: { url: "https://codeberg.org/uzu/tidal", label: "Tidal" } },
+    //     { text: "Floodlight Sports Analytics", link: { url: "https://github.com/floodlight-sports/floodlight", label: "floodlight" } }
+    //   ]
+    // },
     music: {
       title: "Music",
       icon: "music",
