@@ -1,11 +1,12 @@
 import React from "react";
 import { profile } from "../data/profile";
 import { motion } from "framer-motion";
-import ergroomLogo from "../assets/ergroom_logo.png";
+import raceDayPhoto from "../assets/RaceDay.jpeg";
+import oarsIcon from "../assets/oars.png";
 
 const categoryIcons = {
   rowing: (
-    <img src={ergroomLogo} alt="Rowing" className="w-5 h-5 object-contain" />
+    <img src={oarsIcon} alt="Rowing" className="w-5 h-5 object-contain" />
   ),
   scout: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +68,7 @@ function PersonalItem({ item, index }) {
   );
 }
 
-function PersonalCard({ category, icon, index }) {
+function PersonalCard({ category, icon, index, isRowing }) {
   return (
     <motion.div
       className="card p-6"
@@ -98,6 +99,17 @@ function PersonalCard({ category, icon, index }) {
         <p className="text-sm text-gray-600 mb-4">{category.description}</p>
       )}
 
+      {isRowing && (
+        <div className="mb-4">
+          <img
+            src={raceDayPhoto}
+            alt="Columbia Lightweight Rowing Race Day"
+            className="rounded-lg shadow-soft border border-gray-200 w-full object-cover"
+          />
+          <p className="text-xs text-gray-500 mt-2 text-center">Race Day Victory</p>
+        </div>
+      )}
+
       <ul className="space-y-3">
         {category.items.map((item, idx) => (
           <PersonalItem key={idx} item={item} index={idx} />
@@ -121,6 +133,21 @@ export default function Personal() {
         <p className="text-gray-500 mb-8">Beyond the code</p>
       </motion.div>
 
+      {/* Introduction */}
+      <motion.div
+        className="card p-6 mb-8"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+      >
+        <p className="text-gray-600 leading-relaxed">
+          Beyond software engineering, I am deeply involved in athletics, music, and community leadership.
+          As a D1 rower at Columbia, I balance the demands of competitive athletics with academic excellence.
+          My diverse interests—from performing jazz music to leading Eagle Scout projects—shape my approach
+          to problem-solving and teamwork in both technical and personal pursuits.
+        </p>
+      </motion.div>
+
       <div className="grid md:grid-cols-2 gap-6">
         {categories.map(([key, category], idx) => (
           <PersonalCard
@@ -128,6 +155,7 @@ export default function Personal() {
             category={category}
             icon={categoryIcons[category.icon]}
             index={idx}
+            isRowing={key === 'rowing'}
           />
         ))}
       </div>

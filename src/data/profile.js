@@ -115,7 +115,7 @@ export const profile = {
   ],
   skills: {
     advanced: ["Python", "Java", "JavaScript"],
-    intermediate: ["TypeScript", "SQL", "C(++/C)","HTML/CSS"],
+    intermediate: ["TypeScript", "SQL", "C/C++)","HTML/CSS"],
     proficient: ["R", "LaTeX"],
     tools: ["Java Spring Boot", "PyTorch", "Maven", "AWS (Lambda, S3, DynamoDB, Pinpoint, VPC)", "Git", "MongoDB", "Neo4j", "Jest", "Jupyter", "NumPy", "Pandas", "React", "Flask"],
     expertise: ["LLMs", "AI/ML", "Test-Driven Development", "Microservice Architecture", "Full-Stack Development", "Cloud Computing", "REST APIs"]
