@@ -7,7 +7,7 @@ export const profile = {
   github: "https://github.com/arin-jaff",
   linkedin: "https://www.linkedin.com/in/arin-jaff-252977251/",
   headshot: "/headshot.jpeg",
-  resume: "/Jaff, Arin - Resume.pdf",
+  resume: "/Jaff_Arin_Resume.pdf",
   title: "Computer Science Student & Software Engineer",
   education: {
     school: "Columbia University",
@@ -117,7 +117,8 @@ export const profile = {
     advanced: ["Python", "Java", "JavaScript"],
     intermediate: ["TypeScript", "SQL", "C(++/C)","HTML/CSS"],
     proficient: ["R", "LaTeX"],
-    tools: ["Java Spring Boot", "PyTorch", "Maven", "AWS (Lambda, S3, DynamoDB, Pinpoint, VPC)", "Git", "MongoDB", "Neo4j", "Jest", "Jupyter", "NumPy", "Pandas", "React", "Flask"]
+    tools: ["Java Spring Boot", "PyTorch", "Maven", "AWS (Lambda, S3, DynamoDB, Pinpoint, VPC)", "Git", "MongoDB", "Neo4j", "Jest", "Jupyter", "NumPy", "Pandas", "React", "Flask"],
+    expertise: ["LLMs", "AI/ML", "Test-Driven Development", "Microservice Architecture", "Full-Stack Development", "Cloud Computing", "REST APIs"]
   },
   personal: {
     rowing: {
