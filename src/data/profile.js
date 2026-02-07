@@ -72,7 +72,7 @@ export const profile = {
     },
     {
       id: "candle",
-      title: "canDLE?",
+      title: "canDLE",
       tagline: "Daily stock ticker guessing game",
       thumb: "/canDLE.png",
       url: "https://candle.arinjaff.com",
