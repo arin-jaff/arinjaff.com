@@ -106,7 +106,7 @@ function PersonalCard({ category, icon, index, isRowing }) {
             alt="Columbia Lightweight Rowing Race Day"
             className="rounded-lg shadow-soft border border-gray-200 w-full object-cover"
           />
-          <p className="text-xs text-gray-500 mt-2 text-center">Race Day Victory</p>
+          <p className="text-xs text-gray-500 mt-2 text-center">Race Day, IRA National Championships</p>
         </div>
       )}
 
