@@ -61,16 +61,6 @@ export const profile = {
   ],
   projects: [
     {
-      id: "strava-viz",
-      title: "Strava Activity Visualizer",
-      tagline: "Interactive heatmap of personal athletics",
-      thumb: "/strava_logo.png",
-      url: "https://stravavisualizer.arinjaff.com", 
-      github: "https://github.com/arin-jaff/strava-visualizer",
-      description:
-        "A React application integrating the Strava API to fetch athlete activities, decode polyline geodata, and render interactive heatmaps using Leaflet."
-    },
-    {
       id: "ergroom",
       title: "Who's In the Erg Room?",
       tagline: "Real-time erg room occupancy tracker",
@@ -79,6 +69,16 @@ export const profile = {
       github: "https://github.com/arin-jaff/erg-room",
       description:
         "Real-time tracking system for erg room occupancy, helping athletes plan their workouts efficiently. *Currently working with Columbia IT to integrate with campus ethernet for better performance.*"
+    },
+    {
+      id: "candle",
+      title: "canDLE?",
+      tagline: "Daily stock ticker guessing game",
+      thumb: "/canDLE.png",
+      url: "https://candle.arinjaff.com",
+      github: "https://github.com/arin-jaff/candle",
+      description:
+        "A daily word-guessing game inspired by Wordle but using stock tickers instead of words. Built with React and TypeScript, deployed on AWS Lambda and S3."
     },
     {
       id: "pokebank",
@@ -101,6 +101,16 @@ export const profile = {
       ],
       description:
         "Receipt parsing and group-budgeting platform with documented APIs and AWS-backed microservices supporting session handling."
+    },
+    {
+      id: "strava-viz",
+      title: "Strava Activity Visualizer",
+      tagline: "Interactive heatmap of personal athletics",
+      thumb: "/strava_logo.png",
+      url: "https://stravavisualizer.arinjaff.com", 
+      github: "https://github.com/arin-jaff/strava-visualizer",
+      description:
+        "A React application integrating the Strava API to fetch athlete activities, decode polyline geodata, and render interactive heatmaps using Leaflet."
     },
     {
       id: "ctrl-alt-drive",
