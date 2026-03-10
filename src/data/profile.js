@@ -107,7 +107,7 @@ export const profile = {
       title: "Strava Activity Visualizer",
       tagline: "Interactive heatmap of personal athletics",
       thumb: "/strava_logo.png",
-      url: "https://stravavisualizer.arinjaff.com", 
+      wip: true,
       github: "https://github.com/arin-jaff/strava-visualizer",
       description:
         "A React application integrating the Strava API to fetch athlete activities, decode polyline geodata, and render interactive heatmaps using Leaflet."

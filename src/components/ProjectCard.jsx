@@ -18,7 +18,7 @@ export default function ProjectCard({ project, index }) {
           <img
             src={project.thumb}
             alt={project.title}
-            className="object-contain h-full w-full p-4 transition-transform duration-300 group-hover:scale-105"
+            className={`object-contain h-full w-full p-4 transition-transform duration-300 group-hover:scale-105 ${project.wip ? "opacity-40 grayscale" : ""}`}
           />
         ) : (
           <div className="flex flex-col items-center justify-center text-gray-400">
@@ -26,6 +26,13 @@ export default function ProjectCard({ project, index }) {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
             </svg>
             <span className="text-sm">Project Preview</span>
+          </div>
+        )}
+        {project.wip && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute top-4 right-[-28px] rotate-45 bg-yellow-400 text-yellow-900 text-xs font-bold px-10 py-1 shadow">
+              IN PROGRESS
+            </div>
           </div>
         )}
       </div>
@@ -39,7 +46,7 @@ export default function ProjectCard({ project, index }) {
 
         <div className="mt-4 flex items-center gap-3 flex-wrap">
           {/* Live URL if available */}
-          {project.url && (
+          {project.url && !project.wip && (
             <a
               href={project.url}
               target="_blank"
