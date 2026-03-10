@@ -8,7 +8,7 @@ export const profile = {
   linkedin: "https://www.linkedin.com/in/arin-jaff-252977251/",
   headshot: "/headshot.jpeg",
   resume: "/Jaff_Arin_Resume.pdf",
-  title: "Computer Science Student & Software Engineer",
+  title: "AI-Fluent, Cloud-Native Software Engineer",
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",
