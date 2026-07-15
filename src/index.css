@@ -34,7 +34,7 @@
 
 @layer components {
   .card {
-    @apply bg-white rounded shadow-card border border-gray-200 transition-all duration-200;
+    @apply bg-white rounded shadow-card border border-gray-200 transition-[transform,box-shadow,border-color] duration-200;
   }
 
   .card-hover {
