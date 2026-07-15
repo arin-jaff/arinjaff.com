@@ -7,7 +7,7 @@ export default function ProjectCard({ project, index }) {
 
   return (
     <motion.div
-      className="card group"
+      className="card card-hover group overflow-hidden"
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}

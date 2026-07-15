@@ -61,6 +61,18 @@ export const profile = {
   ],
   projects: [
     {
+      id: "traininggeeks",
+      featured: true,
+      title: "TrainingGeeks",
+      tagline: "Own your training data — open-source, self-hosted training log & analytics",
+      thumb: "/traininggeeks.png",
+      url: "https://demo.traininggeeks.net",
+      github: "https://github.com/arin-jaff/TrainingGeeks",
+      tech: ["Next.js 15", "TypeScript", "SQLite", "uPlot", "MapLibre"],
+      description:
+        "A full endurance + strength analytics suite that runs on your machine — no subscription, no cloud, no telemetry. Features a training calendar, per-sport CTL/ATL/TSB performance-management charts with 60-day projections, configurable dashboards, activity analysis with route maps and full metrics (NP, IF, TSS, decoupling), mean-maximal peak power/HR/pace curves, strength analytics, wellness and injury tracking, plus intervals.icu and Garmin sync. The live demo serves my actual training history read-only from a Raspberry Pi at home."
+    },
+    {
       id: "ergroom",
       title: "Who's In the Erg Room?",
       tagline: "Real-time erg room occupancy tracker",

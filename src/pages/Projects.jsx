@@ -1,9 +1,13 @@
 import React from "react";
 import { profile } from "../data/profile";
 import ProjectCard from "../components/ProjectCard";
+import FeaturedProjectCard from "../components/FeaturedProjectCard";
 import { motion } from "framer-motion";
 
 export default function Projects() {
+  const featured = profile.projects.filter((p) => p.featured);
+  const rest = profile.projects.filter((p) => !p.featured);
+
   return (
     <section className="py-8">
       <motion.div
@@ -44,8 +48,12 @@ export default function Projects() {
         </div>
       </motion.div>
 
+      {featured.map((p) => (
+        <FeaturedProjectCard key={p.id} project={p} />
+      ))}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {profile.projects.map((p, index) => (
+        {rest.map((p, index) => (
           <ProjectCard key={p.id} project={p} index={index} />
         ))}
       </div>

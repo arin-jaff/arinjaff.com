@@ -32,8 +32,8 @@ export default function Nav() {
                 to={it.to}
                 className={`px-3 py-1.5 rounded text-sm font-medium transition-all duration-200 ${
                   loc.pathname === it.to
-                    ? "bg-brand-500 text-white"
-                    : "text-gray-600 hover:text-brand-500 hover:bg-gray-50"
+                    ? "bg-brand-500 text-white shadow-sm"
+                    : "text-gray-600 hover:text-brand-500 hover:bg-gray-50 link-underline"
                 }`}
               >
                 {it.label}

@@ -22,7 +22,7 @@ export default function Home() {
             <img
               src={profile.headshot}
               alt={profile.name}
-              className="rounded w-full aspect-square object-cover shadow-soft border border-gray-200"
+              className="rounded w-full aspect-square object-cover shadow-soft border border-gray-200 transition-all duration-300 hover:shadow-glow hover:border-accent-100"
             />
           </motion.div>
 
@@ -32,7 +32,7 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
           >
-            <h1 className="text-2xl font-bold text-brand-500">{profile.name}</h1>
+            <h1 className="text-2xl font-bold gradient-text">{profile.name}</h1>
             <p className="text-sm text-gray-500 mt-1">{profile.title}</p>
 
             <div className="mt-4 pt-4 border-t border-gray-100">
@@ -141,10 +141,10 @@ export default function Home() {
               <div>
                 <img
                   src={wahooHenley}
-                  alt="Columbia Lightweight Rowing team at Henley Royal Regatta"
-                  className="rounded-lg shadow-soft border border-gray-200 w-full object-cover"
+                  alt="Columbia Lightweight Rowing team at Wahoo Henley Regatta"
+                  className="rounded-lg shadow-soft border border-gray-200 w-full object-cover transition-transform duration-500 hover:scale-[1.02]"
                 />
-                <p className="text-xs text-gray-500 mt-2 text-center">Team at Henley Royal Regatta</p>
+                <p className="text-xs text-gray-500 mt-2 text-center">Team at Wahoo Henley Regatta</p>
               </div>
             </div>
           </motion.div>
