@@ -22,6 +22,7 @@ export default function Experience() {
                 {item.company}
               </h3>
               <p className="mt-1 text-sm text-muted-foreground">{item.title}</p>
+              {item.summary && <p className="label mt-2 block">{item.summary}</p>}
 
               <ul className="mt-3 space-y-2">
                 {item.bullets.map((bullet) => (

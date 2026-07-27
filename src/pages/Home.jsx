@@ -14,18 +14,17 @@ const index = [
 ];
 
 const now = [
-  { kind: "current role", when: "present", org: "Phia", detail: "Software Engineer, GTM" },
   {
     kind: "current role",
-    when: "present",
-    org: "Columbia University CS",
-    detail: "Teaching Assistant, Cloud Computing"
+    when: "feb 2026 —",
+    org: "Phia",
+    detail: "Software Engineer, Core Platform"
   },
   {
-    kind: "upcoming role",
-    when: "2026",
-    org: "Garmin",
-    detail: "Software Engineer I — Full-Time, 2026— (Intern Summer 2025)"
+    kind: "current role",
+    when: "— may 2026",
+    org: "Columbia University CS",
+    detail: "Teaching Assistant, Cloud Computing"
   }
 ];
 
@@ -119,10 +118,10 @@ export default function Home() {
           <p className="mt-8 max-w-xl font-display text-base leading-snug md:text-lg">
             I am a Computer Scientist and Software Engineer with experience building cloud services
             and full-stack enterprise applications. I enjoy designing scalable systems that solve
-            real-world problems. I plan on working at Garmin in 2026 as a Software Engineer, and
-            currently I am a Computer Science student at Columbia University, where I am focusing on
-            machine learning, artificial intelligence, and cloud computing. I am working on several
-            projects, including{" "}
+            real-world problems. I am currently a Software Engineer on the Core Platform team at
+            Phia, where I build MCP servers and the AI tooling around them, while finishing my
+            Computer Science degree at Columbia University, focusing on machine learning, artificial
+            intelligence, and cloud computing. I am working on several projects, including{" "}
             <a
               href="https://ergroom.arinjaff.com"
               target="_blank"
@@ -131,9 +130,9 @@ export default function Home() {
             >
               Who's in the Erg Room?
             </a>{" "}
-            — an online web-tracker for Columbia Lightweight Rowing which uses a Raspberry Pi, RFID
-            module, and a Flask application to show real-time erg room occupancy. Check out my other
-            projects and prior experience!
+            — an RFID attendance system for Columbia Lightweight Rowing which uses a Raspberry Pi,
+            RFID module, and a Flask application to show real-time erg room occupancy. Check out my
+            other projects and prior experience!
           </p>
         </div>
 

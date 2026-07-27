@@ -1,7 +1,7 @@
-// Profile data sourced from uploaded resume. See resume: :contentReference[oaicite:1]{index=1}
+// Canonical site content. Kept in sync with public/Jaff_Arin_Resume.pdf.
 export const profile = {
   name: "Arin Kosar Jaff",
-  location: "Kirkland, WA",
+  location: "New York, NY",
   email: "akj2147@columbia.edu",
   phone: "(425) 229-1603",
   github: "https://github.com/arin-jaff",
@@ -12,61 +12,67 @@ export const profile = {
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",
-    degree: "Bachelor's Degree, Computer Science",
-    gpa: "3.80/4.00",
-    honors: ["Men's Varsity Crew", "Dean's List"],
-    coursework: ["Machine Learning", "Artificial Intelligence", "Analysis of Algorithms", "Natural Language Processing", "Computer Networks", "Cloud Computing", "Hacking 4 Defense", "Large Language Models", "Ethical and Responsible AI", "Foundations and Ethics of LLMs"]
+    degree: "BA, Computer Science",
+    gpa: "3.82/4.00",
+    honors: ["D1 Varsity Lightweight Crew", "Cloud Computing TA", "Dean's List"],
+    coursework: [
+      "Machine Learning",
+      "Artificial Intelligence",
+      "Natural Language Processing",
+      "Large Language Models",
+      "Analysis of Algorithms",
+      "Computer Networks",
+      "Cloud Computing (AWS)",
+      "Ethics of LLMs"
+    ]
   },
   experience: [
     {
       company: "Phia",
-      title: "Software Engineer, GTM",
+      title: "Software Engineer, Core Platform",
+      summary: "Translating business workflows into production AI systems",
       location: "New York, NY",
       period: "Feb 2026 — Present",
       bullets: [
-        "Designed and launched the company's first MCP servers (Docker/Cloud Run, Terraform), exposing internal CRM and analytics databases to LLM agents; auth and routing conventions adopted by all subsequent internal AI services.",
-        "Sole owner of the customer-facing self-serve web platform (Next.js/Vercel, Supabase) serving 1,000+ brand partners, plus automated performance reports built on live data from 20+ affiliate network APIs.",
-        "Built a headless rendering service producing pixel-accurate iOS app screenshots, exposed as an MCP tool powering AI email automation that cut response turnaround 30%+."
-      ]
-    },
-    {
-      company: "Columbia University Computer Science",
-      title: "Teaching Assistant, Cloud Computing",
-      location: "New York, NY",
-      period: "Sep 2025 — May 2026",
-      bullets: [
-        "Led weekly office hours for 200+ students in theory and applications for Cloud Computing.",
-        "Code reviewed and graded 50+ student projects with AWS management and microservice deployment."
+        "Designed and launched the company's first MCP servers (Docker/Cloud Run, Terraform), connecting internal CRM and analytics databases to LLM agents with natural-language query, bulk-write, and reporting tooling.",
+        "Formulated OAuth 2.1 authentication and routing conventions adopted by all internal agentic services.",
+        "Architected an enterprise-facing self-serve web platform (Next.js/Vercel, GCP) serving 1,000+ brand partners, with a high-throughput data automation engine aggregating and normalizing live analytical metrics from 20+ partner APIs.",
+        "Engineered a headless rendering microservice producing pixel-accurate iOS app screenshots, exposed as an MCP tool powering AI-driven communication pipelines, reducing operational response times by 70%+."
       ]
     },
     {
       company: "Garmin Ltd.",
-      title: "Software Engineer Intern — Device Interactions",
+      title: "Software Engineer Intern, Device Interactions",
+      summary: "Wearables backend & public API infrastructure",
       location: "Olathe, KS",
       period: "May 2025 — Aug 2025",
       bullets: [
-        "Shipped new failover system for public Garmin Weather API, reducing a key endpoint's error rate by 99%.",
-        "Used Java Spring Boot and Redis for state management; developed backend service planned for Q1 2026."
+        "Engineered a backend wearables service shipped to production in the Forerunner 970/570 launch.",
+        "Built a failover system for the public Garmin Weather API (Java Spring Boot, Redis state management), cutting endpoint error rate by 99%.",
+        "Owned features from design through CI/CD production deployment in agile sprints; demoed at weekly stand-ups."
       ]
     },
     {
       company: "Covet Inc.",
       title: "Full-Stack Software Engineer Intern",
+      summary: "Scalable onboarding & systems automation",
       location: "Seattle, WA",
       period: "May 2024 — Aug 2024",
       bullets: [
-        "Launched AWS-based onboarding service used to acquire first 100+ clients.",
-        "Implemented test-driven site error detection (Jest) and a sitewide Rule Engine reducing client configuration errors by 99%+."
+        "Launched a company-first AWS-backed onboarding service that facilitated the first 100+ client acquisitions.",
+        "Implemented a sitewide rule engine that cut client configuration errors by 99%+.",
+        "Automated legal document generation with built-in validation, streamlining the customer onboarding flow."
       ]
     },
     {
-      company: "University of Chicago, Dept. of Economics",
-      title: "Research Assistant, Prof. John List",
+      company: "University of Chicago, Prof. John List",
+      title: "Research Assistant",
+      summary: "Behavioral economics research & data automation",
       location: "Chicago, IL",
       period: "May 2023 — Aug 2023",
       bullets: [
-        "Authored data-driven paper on brain-drain; won department-wide internship competition.",
-        "Automated citation management and reduced citation time by 80%."
+        "Won the department-wide intern research competition with a data-driven paper on brain drain.",
+        "Cut citation-verification time by 80% for The Voltage Effect (ISBN: 9780226820675) by building automated database/API services."
       ]
     }
   ],
@@ -75,23 +81,24 @@ export const profile = {
       id: "traininggeeks",
       featured: true,
       title: "TrainingGeeks",
-      tagline: "Own your training data — open-source, self-hosted training log & analytics",
+      tagline: "Open-source, self-hosted endurance & strength analytics platform",
       thumb: "/traininggeeks.png",
       url: "https://demo.traininggeeks.net",
       github: "https://github.com/arin-jaff/TrainingGeeks",
-      tech: ["Next.js 15", "TypeScript", "SQLite", "uPlot", "MapLibre"],
+      tech: ["Next.js 15", "TypeScript", "node:sqlite", "Garmin FIT SDK", "ECharts/uPlot", "Tauri"],
       description:
-        "A full endurance + strength analytics suite that runs on your machine — no subscription, no cloud, no telemetry. Features a training calendar, per-sport CTL/ATL/TSB performance-management charts with 60-day projections, configurable dashboards, activity analysis with route maps and full metrics (NP, IF, TSS, decoupling), mean-maximal peak power/HR/pace curves, strength analytics, wellness and injury tracking, plus intervals.icu and Garmin sync. The live demo serves my actual training history read-only from a Raspberry Pi at home."
+        "A 28K+ line, AGPL-3.0 training platform you run yourself. Ships a training calendar, CTL/ATL/TSB performance modeling, strength analytics with 1RM estimation, and intervals.icu sync, plus a macOS desktop release (Tauri + Node sidecar) built by an automated release pipeline. A federation protocol and pluggable directory server (Node 24/Hono/SQLite) let independently self-hosted instances share activity feeds, kudos, and leaderboards while all training data stays on the user's machine. Maintained as full open-source infrastructure: GitHub Actions CI + Dependabot, unit and integration test suites, contributor docs, versioned releases, and a live demo self-hosted on a Raspberry Pi."
     },
     {
       id: "ergroom",
       title: "Who's In the Erg Room?",
-      tagline: "Real-time erg room occupancy tracker",
+      tagline: "RFID-based attendance system for Columbia Lightweight Rowing",
       thumb: "/ergroom_logo.png",
       url: "https://ergroom.arinjaff.com",
       github: "https://github.com/arin-jaff/erg-room",
+      tech: ["Raspberry Pi", "RFID+NFC", "Flask", "SQLite", "HTMX", "Cloudflare Tunnel"],
       description:
-        "Real-time tracking system for erg room occupancy, helping athletes plan their workouts efficiently. *Currently working with Columbia IT to integrate with campus ethernet for better performance.*"
+        "A real-time presence tracking system serving 30+ D1 athletes using a Raspberry Pi, RFID+NFC, and a Flask web app. Deployed to production behind a Cloudflare Tunnel (SQLite + HTMX), eliminating manual attendance logging for daily team practices."
     },
     {
       id: "candle",
@@ -147,11 +154,43 @@ export const profile = {
     }
   ],
   skills: {
-    advanced: ["Python", "Java", "JavaScript"],
-    intermediate: ["TypeScript", "SQL", "C/C++)","HTML/CSS"],
-    proficient: ["R", "LaTeX"],
-    tools: ["Java Spring Boot", "PyTorch", "Maven", "AWS (Lambda, S3, DynamoDB, Pinpoint, VPC)", "Git", "MongoDB", "Neo4j", "Jest", "Jupyter", "NumPy", "Pandas", "React", "Flask"],
-    expertise: ["LLMs", "AI/ML", "Test-Driven Development", "Microservice Architecture", "Full-Stack Development", "Cloud Computing", "REST APIs"]
+    languages: [
+      "Python",
+      "TypeScript/JavaScript",
+      "SQL",
+      "C/C++",
+      "Rust",
+      "Java",
+      "HTML/CSS",
+      "R",
+      "LaTeX"
+    ],
+    mlAi: [
+      "Anthropic/Claude API",
+      "LLM Agent Pipelines",
+      "MCP Servers",
+      "PyTorch",
+      "HuggingFace Transformers",
+      "LoRA/QLoRA Fine-Tuning",
+      "Pydantic",
+      "NumPy",
+      "Pandas"
+    ],
+    infrastructure: [
+      "Next.js/React",
+      "FastAPI",
+      "Flask",
+      "GCP (Cloud Run)",
+      "AWS (Lambda, S3, DynamoDB)",
+      "Docker",
+      "Terraform",
+      "Redis",
+      "PostgreSQL (Supabase)",
+      "SQLite",
+      "MongoDB",
+      "Git",
+      "CI/CD"
+    ]
   },
   personal: {
     rowing: {
@@ -164,22 +203,12 @@ export const profile = {
           link: { url: "https://gocolumbialions.com/sports/lightweight-rowing/roster/arin-jaff/22235", label: "View Profile" }
         },
         {
-          text: "IRA National Championship Bronze Medalist 2025",
+          text: "IRA National Rowing Championship Medalist — Bronze, Columbia Lightweight Varsity Crew, May 2025",
           link: { url: "https://gocolumbialions.com/news/2025/6/1/general-lightweight-2v8-crew-earns-bronze-on-final-day-of-ira-national-championships", label: "Read More" }
         },
-        { text: "Maintained 4.0+ GPA while managing 40+ hr/week athletic time commitment" }
+        { text: "Maintained a 3.82 GPA while managing a 40+ hr/week athletic time commitment" }
       ]
     },
-    // openSource: {
-    //   title: "Open Source Contributions",
-    //   icon: "code",
-    //   description: "Passionate about contributing to open source projects, particularly in sports analytics and scientific computing.",
-    //   items: [
-    //     { text: "Projects:" },
-    //     { text: "Contributions to Tidal, a live coding music environment", link: { url: "https://codeberg.org/uzu/tidal", label: "Tidal" } },
-    //     { text: "Floodlight Sports Analytics", link: { url: "https://github.com/floodlight-sports/floodlight", label: "floodlight" } }
-    //   ]
-    // },
     music: {
       title: "Music",
       icon: "music",
@@ -200,6 +229,7 @@ export const profile = {
       title: "Eagle Scout",
       icon: "scout",
       items: [
+        { text: "Eagle Scout with Silver Palm, Boy Scouts of America" },
         { text: "Led 100+ volunteers in community service project" },
         { text: "Earned Silver Palm honor for earning additional merit badges and serving in leadership" },
         { text: "Served on senior patrol for 4+ years" },
@@ -211,7 +241,7 @@ export const profile = {
       icon: "lightbulb",
       link: { url: "https://olin.washu.edu/about/news-and-media/news/2020/05/ideas-win-big-at-olins-first-bigidea-bounce.php", label: "Read More" },
       items: [
-        { text: "Finalist — Spring 2022" },
+        { text: "Runner-Up Venture Award with Cash Prize" },
         { text: "Won grant over 200+ teams for product design of new Epi-Pen with financial model and full product design" }
       ]
     }
