@@ -60,7 +60,7 @@ so 1 January lands on its real weekday.
 The mirror's commits mostly don't appear in the public contributions calendar, so the blue ramp is
 scaled by quartiles over the mirror's *own* commit counts. Without that, every phia day collapses
 to the palest shade. The headline number is GitHub's public count and deliberately excludes the
-mirror — hence "public contributions in the last year".
+mirror — hence "public contributions in {year}".
 
 Note the snapshot is public: it records which days had phia commits and how many.
 
