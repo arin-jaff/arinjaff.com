@@ -84,6 +84,28 @@
     background: var(--color-accent);
     color: var(--color-background);
   }
+
+  /* One keyboard-focus treatment for everything that takes focus. */
+  :focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--archive-desk);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--archive-rule);
+    border: 3px solid var(--archive-desk);
+    border-radius: 999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-border-strong);
+  }
 }
 
 @layer components {
@@ -275,10 +297,12 @@
   }
 
   /* --- content bits --- */
+  /* Photographs read as prints mounted on the page, not flat images. */
   .archive-mat {
     border: 1px solid var(--archive-rule);
     background: var(--archive-mount);
     padding: 6px;
+    box-shadow: 0 2px 8px -2px var(--archive-shadow);
   }
 }
 

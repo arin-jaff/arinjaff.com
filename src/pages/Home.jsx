@@ -14,14 +14,8 @@ const index = [
 ];
 
 const now = [
+  { when: "feb 2026 —", org: "Phia", detail: "Software Engineer, Core Platform" },
   {
-    kind: "current role",
-    when: "feb 2026 —",
-    org: "Phia",
-    detail: "Software Engineer, Core Platform"
-  },
-  {
-    kind: "current role",
     when: "— may 2026",
     org: "Columbia University CS",
     detail: "Teaching Assistant, Cloud Computing"
@@ -67,7 +61,6 @@ export default function Home() {
               />
             </div>
             <div className="min-w-[14rem] flex-1">
-              <p className="label mb-3">folder 00 · index</p>
               <h1 className="font-display text-2xl leading-none md:text-3xl">{profile.name}</h1>
               <p className="mt-3 text-sm md:text-base">{profile.title}</p>
 
@@ -116,35 +109,58 @@ export default function Home() {
             </div>
           </div>
 
-          <p className="mt-8 max-w-xl font-display text-base leading-snug md:text-lg">
-            I am a Computer Scientist and Software Engineer with experience building cloud services
-            and full-stack enterprise applications. I enjoy designing scalable systems that solve
-            real-world problems. I am currently a Software Engineer on the Core Platform team at
-            Phia, where I build MCP servers and the AI tooling around them, while finishing my
-            Computer Science degree at Columbia University, focusing on machine learning, artificial
-            intelligence, and cloud computing. I am working on several projects, including{" "}
-            <a
-              href="https://ergroom.arinjaff.com"
-              target="_blank"
-              rel="noreferrer"
-              className="underline decoration-border underline-offset-4 transition-colors hover:text-accent"
-            >
-              Who's in the Erg Room?
-            </a>{" "}
-            — an RFID attendance system for Columbia Lightweight Rowing which uses a Raspberry Pi,
-            RFID module, and a Flask application to show real-time erg room occupancy. Check out my
-            other projects and prior experience!
-          </p>
+          <div className="mt-10 max-w-xl space-y-5 text-base leading-relaxed md:text-lg md:leading-relaxed">
+            <p>
+              I am a Computer Scientist and Software Engineer with experience building cloud services
+              and full-stack enterprise applications. I enjoy designing scalable systems that solve
+              real-world problems.
+            </p>
+            <p>
+              I am currently a Software Engineer on the Core Platform team at Phia, where I build MCP
+              servers and the AI tooling around them, while finishing my Computer Science degree at
+              Columbia University, focusing on machine learning, artificial intelligence, and cloud
+              computing.
+            </p>
+            <p>
+              I am working on several projects, including{" "}
+              <a
+                href="https://ergroom.arinjaff.com"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-border underline-offset-4 transition-colors hover:text-accent"
+              >
+                Who's in the Erg Room?
+              </a>{" "}
+              — an RFID attendance system for Columbia Lightweight Rowing which uses a Raspberry Pi,
+              RFID module, and a Flask application to show real-time erg room occupancy. Check out my
+              other projects and prior experience!
+            </p>
+          </div>
         </div>
 
-        <div>
-          <div className="mb-3 flex items-center justify-between">
-            <p className="font-mono text-[10px] font-bold tracking-[0.18em] text-foreground">index</p>
+        <div className="space-y-10">
+          <div>
+            <p className="label-strong mb-3 block">index</p>
+            <div className="divide-y divide-border border-y border-border">
+              {index.map((item) => (
+                <IndexRow key={item.number} item={item} />
+              ))}
+            </div>
           </div>
-          <div className="divide-y divide-border border-y border-border">
-            {index.map((item) => (
-              <IndexRow key={item.number} item={item} />
-            ))}
+
+          <div>
+            <p className="label-strong mb-3 block">now</p>
+            <div className="divide-y divide-border border-y border-border">
+              {now.map((role) => (
+                <div key={role.org} className="py-3.5">
+                  <div className="flex items-baseline justify-between gap-3">
+                    <span className="font-display text-sm leading-none">{role.org}</span>
+                    <span className="label shrink-0">{role.when}</span>
+                  </div>
+                  <p className="mt-1.5 text-sm text-muted-foreground">{role.detail}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -192,25 +208,6 @@ export default function Home() {
                 team at wahoo henley regatta
               </figcaption>
             </figure>
-          </div>
-        </section>
-
-        <section aria-label="Now">
-          <h2 className="label-strong mb-3">now</h2>
-          <div className="divide-y divide-border border-y border-border">
-            {now.map((role, i) => (
-              <div key={role.org} className="py-5 md:py-6">
-                <div className="mb-2 flex items-baseline gap-4">
-                  <span className="specimen-index">{String(i + 1).padStart(2, "0")}</span>
-                  <span className="label">{role.kind}</span>
-                  <span className="label ml-auto">{role.when}</span>
-                </div>
-                <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
-                  {role.org}
-                </h3>
-                <p className="mt-1 text-sm text-muted-foreground">{role.detail}</p>
-              </div>
-            ))}
           </div>
         </section>
 

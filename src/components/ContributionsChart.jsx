@@ -63,7 +63,7 @@ export default function ContributionsChart() {
         <div className="mb-4 flex flex-wrap items-baseline gap-4">
           <span className="specimen-index">{data.total}</span>
           <span className="label">contributions in the last year</span>
-          <span className="label ml-auto">@{data.username}</span>
+          <span className="label ml-auto">github · {data.username}</span>
         </div>
 
         <div className="overflow-x-auto pb-1">
