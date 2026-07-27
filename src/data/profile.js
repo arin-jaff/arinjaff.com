@@ -9,7 +9,7 @@ export const profile = {
   strava: "https://www.strava.com/athletes/44634937",
   headshot: "/headshot.jpeg",
   resume: "/Jaff_Arin_Resume.pdf",
-  title: "AI-Fluent, Cloud-Native Software Engineer",
+  title: "Software Engineer",
   education: {
     school: "Columbia University",
     period: "Sep 2022 — May 2026",

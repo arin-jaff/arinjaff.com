@@ -30,6 +30,9 @@
   --archive-tab-writing: #c99da7;
   --archive-tab-about: #b5a1c1;
   --archive-tab-ink: #344038;
+  /* The index tab's coral, deepened enough to pass as body-size text.
+     The tab value itself is only 2.06:1 on paper. */
+  --archive-mark: #9c5540;
 
   --archive-shadow: #2b312829;
 }
@@ -62,6 +65,8 @@
     --archive-tab-writing: #704f5b;
     --archive-tab-about: #5f5068;
     --archive-tab-ink: #f1ecdf;
+    /* On the dark sheet the tab's own coral already clears 5:1. */
+    --archive-mark: #d6a08e;
 
     --archive-shadow: #090e0b4d;
   }

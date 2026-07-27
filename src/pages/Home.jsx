@@ -4,6 +4,7 @@ import { profile } from "../data/profile";
 import { GithubIcon, LinkedinIcon, MailIcon, MapPinIcon, FileTextIcon } from "../components/icons";
 import ContributionsChart from "../components/ContributionsChart";
 import CompanyLogo from "../components/CompanyLogo";
+import Definition from "../components/Definition";
 import wahooHenley from "../assets/WahooHenley.jpeg";
 
 const index = [
@@ -58,6 +59,17 @@ export default function Home() {
             <div className="min-w-[14rem] flex-1">
               <h1 className="font-display text-2xl leading-none md:text-3xl">{profile.name}</h1>
               <p className="mt-3 text-sm md:text-base">{profile.title}</p>
+              <div className="mt-2 text-xs text-muted-foreground md:text-sm">
+                <Definition
+                  term="PR"
+                  pronunciation="/ˌpiː ˈɑːr/"
+                  senses={[
+                    "Abbreviation for “pull request,” a proposal by a developer to merge code changes from one branch into a main codebase",
+                    "Abbreviation for “personal record,” an individual’s highest achievement in a scope or field, often athletics"
+                  ]}
+                />{" "}
+                specialist
+              </div>
 
               <div className="mt-5 space-y-1.5 text-sm text-muted-foreground">
                 <p className="flex items-center gap-2">
@@ -171,8 +183,8 @@ export default function Home() {
           <div className="grid gap-8 border-y border-border py-6 md:grid-cols-2 md:items-start">
             <div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                I am an <span className="font-medium text-foreground">ex-D1 athlete</span> who rowed
-                for the{" "}
+                I just completed my career as a{" "}
+                <span className="font-medium text-foreground">D1 athlete</span> for the{" "}
                 <span className="font-medium text-foreground">Columbia Lightweight Rowing team</span>.
                 I was a part of the 2V8 crew which earned{" "}
                 <span className="font-medium text-foreground">
