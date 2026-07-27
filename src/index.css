@@ -296,7 +296,9 @@
     justify-content: space-between;
     padding-inline: 12px;
     font-size: 9px;
-    letter-spacing: 0.13em;
+    /* Space Mono runs wider than the tab was drawn for — ease the tracking so
+       the longest label still clears its number. */
+    letter-spacing: 0.07em;
   }
 }
 

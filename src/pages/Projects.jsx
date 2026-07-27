@@ -1,6 +1,7 @@
 import React from "react";
 import { profile } from "../data/profile";
 import PageHeader from "../components/PageHeader";
+import { GithubIcon, ExternalLinkIcon, FileTextIcon } from "../components/icons";
 
 function status(project) {
   if (project.wip) return "wip";
@@ -8,21 +9,23 @@ function status(project) {
   return "source";
 }
 
-function ExternalLink({ href, children }) {
+function Pill({ href, icon: PillIcon, children }) {
   return (
     <a
       href={href}
       target="_blank"
       rel="noreferrer"
-      className="group inline-flex items-center gap-1.5 text-sm transition-colors hover:text-accent"
+      className="inline-flex items-center gap-2 rounded-full border border-border px-3 py-1.5 text-sm transition-colors hover:border-border-strong hover:bg-paper-deep hover:text-accent"
     >
+      <PillIcon className="size-4" />
       {children}
-      <span className="font-mono transition-transform duration-200 group-hover:translate-x-1">↗</span>
     </a>
   );
 }
 
 function ProjectRow({ project, number }) {
+  const thumbSize = project.showcase ? "h-40 w-40 sm:h-52 sm:w-52" : "h-24 w-24";
+
   return (
     <article className="py-5 md:py-6">
       <div className="mb-3 flex flex-wrap items-baseline gap-4">
@@ -33,19 +36,29 @@ function ProjectRow({ project, number }) {
 
       <div className="flex flex-col gap-5 sm:flex-row">
         {project.thumb && (
-          <div className="archive-mat h-24 w-24 shrink-0">
+          <div className={`archive-mat shrink-0 ${thumbSize}`}>
             <img
               src={project.thumb}
               alt={project.title}
-              className={`h-full w-full object-contain ${project.wip ? "opacity-40 grayscale" : ""}`}
+              className={`h-full w-full ${
+                project.thumbFit === "left" ? "object-cover object-left" : "object-contain"
+              } ${project.wip ? "opacity-40 grayscale" : ""}`}
             />
           </div>
         )}
 
         <div className="min-w-0 flex-1">
-          <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
-            {project.title}
-          </h3>
+          <div className="flex flex-wrap items-center gap-3">
+            <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
+              {project.title}
+            </h3>
+            {project.featured && (
+              <span className="label rounded-full bg-accent px-2.5 py-1 text-background">
+                featured
+              </span>
+            )}
+          </div>
+
           <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{project.description}</p>
 
           {project.tech && (
@@ -58,16 +71,26 @@ function ProjectRow({ project, number }) {
             </div>
           )}
 
-          <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-2">
+          <div className="mt-4 flex flex-wrap items-center gap-3">
             {project.url && !project.wip && (
-              <ExternalLink href={project.url}>live demo</ExternalLink>
+              <Pill href={project.url} icon={ExternalLinkIcon}>
+                live demo
+              </Pill>
             )}
-            {project.github && <ExternalLink href={project.github}>github</ExternalLink>}
-            {project.pdfLink && <ExternalLink href={project.pdfLink}>proposal pdf</ExternalLink>}
+            {project.github && (
+              <Pill href={project.github} icon={GithubIcon}>
+                github
+              </Pill>
+            )}
+            {project.pdfLink && (
+              <Pill href={project.pdfLink} icon={FileTextIcon}>
+                proposal pdf
+              </Pill>
+            )}
             {project.githubRepos?.map((repo) => (
-              <ExternalLink key={repo.name} href={repo.url}>
+              <Pill key={repo.name} href={repo.url} icon={GithubIcon}>
                 {repo.name.toLowerCase()}
-              </ExternalLink>
+              </Pill>
             ))}
           </div>
         </div>

@@ -41,6 +41,17 @@ export const profile = {
       ]
     },
     {
+      company: "Columbia University Computer Science",
+      title: "Teaching Assistant, Cloud Computing",
+      summary: "Course staff for cloud computing",
+      location: "New York, NY",
+      period: "Sep 2025 — May 2026",
+      bullets: [
+        "Led weekly office hours for 200+ students in theory and applications for Cloud Computing.",
+        "Code reviewed and graded 50+ student projects with AWS management and microservice deployment."
+      ]
+    },
+    {
       company: "Garmin Ltd.",
       title: "Software Engineer Intern, Device Interactions",
       summary: "Wearables backend & public API infrastructure",
@@ -85,9 +96,21 @@ export const profile = {
       thumb: "/traininggeeks.png",
       url: "https://demo.traininggeeks.net",
       github: "https://github.com/arin-jaff/TrainingGeeks",
+      thumbFit: "left",
       tech: ["Next.js 15", "TypeScript", "node:sqlite", "Garmin FIT SDK", "ECharts/uPlot", "Tauri"],
       description:
         "A 28K+ line, AGPL-3.0 training platform you run yourself. Ships a training calendar, CTL/ATL/TSB performance modeling, strength analytics with 1RM estimation, and intervals.icu sync, plus a macOS desktop release (Tauri + Node sidecar) built by an automated release pipeline. A federation protocol and pluggable directory server (Node 24/Hono/SQLite) let independently self-hosted instances share activity feeds, kudos, and leaderboards while all training data stays on the user's machine. Maintained as full open-source infrastructure: GitHub Actions CI + Dependabot, unit and integration test suites, contributor docs, versioned releases, and a live demo self-hosted on a Raspberry Pi."
+    },
+    {
+      id: "nyc-arteries",
+      title: "Nervous System: NYC",
+      tagline: "A living drawing of the city's transit",
+      thumb: "/nyc_arteries.png",
+      showcase: true,
+      url: "https://nyc.arinjaff.com",
+      tech: ["React", "MapLibre", "Zustand", "GTFS-realtime", "GBFS", "Canvas"],
+      description:
+        "New York's transit infrastructure rendered as a glowing organism. Six live feeds animate on one canvas — subway trains snapping between stations, Citi Bike pulses radiating from each real GBFS checkout, Manhattan buses threading the street grid, commuter rail shooting out of midtown, ferries cutting the East River, and aircraft arcing over all of it. Trails decay on a configurable window and garbage-collect behind a 60 FPS target, over a CartoDB dark-matter basemap with four palettes (realistic MTA route colors, cyberpunk, monochrome, heatmap)."
     },
     {
       id: "ergroom",

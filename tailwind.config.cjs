@@ -20,7 +20,7 @@ module.exports = {
       fontFamily: {
         sans: ['"Space Grotesk"', "ui-sans-serif", "system-ui", "sans-serif"],
         display: ['"Space Grotesk"', "ui-sans-serif", "system-ui", "sans-serif"],
-        mono: ['"JetBrains Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
+        mono: ['"Space Mono"', "ui-monospace", "SFMono-Regular", "Menlo", "monospace"]
       }
     }
   },
