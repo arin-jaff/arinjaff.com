@@ -67,8 +67,8 @@ Note the snapshot is public: it records which days had phia commits and how many
 ## Company logos
 
 `public/logos/` — sourced from each company's own site or favicon and visually verified. Covet Inc.
-has no reliably identifiable domain, so it falls through to the monogram tile in `CompanyLogo`.
-Never guess a logo onto a résumé entry.
+is `covet.life`, not any of the obvious `covet.*` guesses. `CompanyLogo` falls back to a monogram
+tile for anything unsourced. Never guess a logo onto a résumé entry — check the mark by eye first.
 
 ## Working on this
 

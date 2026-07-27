@@ -69,6 +69,7 @@ export const profile = {
     },
     {
       company: "Covet Inc.",
+      logo: "/logos/covet.png",
       title: "Full-Stack Software Engineer Intern",
       summary: "Scalable onboarding & systems automation",
       location: "Seattle, WA",

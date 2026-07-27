@@ -17,12 +17,39 @@ function ItemLink({ link }) {
   );
 }
 
+function TrainingTile({ href, logo, alt, title, caption, cropLogo }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="group inline-flex items-center gap-4 border border-border bg-mount p-4 shadow-[0_2px_8px_-2px_var(--archive-shadow)] transition-colors hover:border-border-strong"
+    >
+      <img
+        src={logo}
+        alt={alt}
+        // the TrainingGeeks file is a wide lockup, so crop to its mark
+        className={`size-11 shrink-0 rounded border border-border ${
+          cropLogo ? "object-cover object-left" : ""
+        }`}
+      />
+      <span>
+        <span className="block font-display text-base italic leading-none">{title}</span>
+        <span className="label mt-2 block">{caption}</span>
+      </span>
+      <span className="ml-2 font-mono text-muted-foreground transition-transform duration-200 group-hover:translate-x-1">
+        ↗
+      </span>
+    </a>
+  );
+}
+
 export default function Personal() {
   const categories = Object.entries(profile.personal);
 
   return (
     <div className="mx-auto max-w-6xl py-6 md:py-8">
-      <PageHeader number="04" name="personal" title="beyond the code" />
+      <PageHeader title="beyond the code" />
 
       <div className="max-w-3xl">
         <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
@@ -31,27 +58,23 @@ export default function Personal() {
           ventures into triathlons.
         </p>
 
-        <a
-          href={profile.strava}
-          target="_blank"
-          rel="noreferrer"
-          className="group mb-12 inline-flex items-center gap-4 border border-border bg-mount p-4 shadow-[0_2px_8px_-2px_var(--archive-shadow)] transition-colors hover:border-border-strong"
-        >
-          <img
-            src="/logos/strava.png"
+        <div className="mb-12 flex flex-wrap gap-4">
+          <TrainingTile
+            href={profile.strava}
+            logo="/logos/strava.png"
             alt="Strava"
-            className="size-11 shrink-0 rounded border border-border"
+            title="Follow my Strava!"
+            caption="running · cycling · rowing"
           />
-          <span>
-            <span className="block font-display text-base italic leading-none">
-              Follow my Strava!
-            </span>
-            <span className="label mt-2 block">running · cycling · rowing</span>
-          </span>
-          <span className="ml-2 font-mono text-muted-foreground transition-transform duration-200 group-hover:translate-x-1">
-            ↗
-          </span>
-        </a>
+          <TrainingTile
+            href="https://traininggeeks.net"
+            logo="/traininggeeks.png"
+            alt="TrainingGeeks"
+            title="View my training data"
+            caption="traininggeeks.net"
+            cropLogo
+          />
+        </div>
 
         <div className="space-y-14">
           {categories.map(([key, category], i) => (
