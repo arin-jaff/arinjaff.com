@@ -13,14 +13,14 @@ const index = [
   { number: "05", label: "github", href: profile.github }
 ];
 
+// Dates and titles come from the resume data so the two can't drift apart.
 const now = [
-  { when: "feb 2026 —", org: "Phia", detail: "Software Engineer, Core Platform" },
-  {
-    when: "— may 2026",
-    org: "Columbia University CS",
-    detail: "Teaching Assistant, Cloud Computing"
-  }
-];
+  { company: "Phia", short: "Phia" },
+  { company: "Columbia University Computer Science", short: "Columbia University CS" }
+].map(({ company, short }) => {
+  const role = profile.experience.find((item) => item.company === company);
+  return { org: short, when: role.period, detail: role.title };
+});
 
 const rowClass =
   "group grid grid-cols-[34px_1fr_auto] items-center gap-3 py-3.5 transition-colors hover:bg-paper-deep";

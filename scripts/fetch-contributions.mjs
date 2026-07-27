@@ -61,9 +61,13 @@ async function phiaCommitsByDay() {
   while (url) {
     const res = await fetch(url, { headers });
     if (res.status === 404) {
+      // GitHub returns 404 rather than 403 for private repos you cannot see,
+      // so a token that lacks access looks identical to a missing repo.
       console.warn(
-        `! ${PHIA_REPO} not reachable — every day stays green.` +
-          (TOKEN ? "" : " Set GITHUB_TOKEN (`gh auth token`) if the repo is private.")
+        `! ${PHIA_REPO} not reachable — every day stays green.\n  ` +
+          (TOKEN
+            ? "The token authenticated, but this account cannot see that repo. Use a token from the account that owns it."
+            : "If the repo is private, pass a token: GITHUB_TOKEN=$(gh auth token) npm run contributions")
       );
       return perDay;
     }

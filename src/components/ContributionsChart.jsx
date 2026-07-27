@@ -101,12 +101,11 @@ export default function ContributionsChart() {
         <div className="mt-5 flex flex-wrap items-center gap-x-8 gap-y-3">
           <span className="label inline-flex items-center gap-2">
             <Ramp colors={GREEN} />
-            everything else
+            personal
           </span>
           <span className="label inline-flex items-center gap-2">
             <Ramp colors={BLUE} />
-            {data.repo.split("/").pop()}
-            {data.phiaTotal > 0 && ` · ${data.phiaTotal}`}
+            phia
           </span>
         </div>
       </div>
