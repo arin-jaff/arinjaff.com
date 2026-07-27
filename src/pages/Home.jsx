@@ -111,9 +111,9 @@ export default function Home() {
               real-world problems.
             </p>
             <p>
-              I am currently a Software Engineer on the Core Platform team at Phia, where I build MCP
-              servers and the AI tooling around them, while finishing my Computer Science degree at
-              Columbia University, focusing on machine learning, artificial intelligence, and cloud
+              I am a Software Engineer on the Core Platform team at Phia, where I build MCP servers
+              and the AI tooling around them. I hold a Computer Science degree from Columbia
+              University, where I focused on machine learning, artificial intelligence, and cloud
               computing.
             </p>
             <p>
@@ -171,16 +171,16 @@ export default function Home() {
           <div className="grid gap-8 border-y border-border py-6 md:grid-cols-2 md:items-start">
             <div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                I am a <span className="font-medium text-foreground">D1 athlete</span> competing for
-                the <span className="font-medium text-foreground">Columbia Lightweight Rowing team</span>
-                . I was a part of the 2V8 crew which earned{" "}
+                I am an <span className="font-medium text-foreground">ex-D1 athlete</span> who rowed
+                for the{" "}
+                <span className="font-medium text-foreground">Columbia Lightweight Rowing team</span>.
+                I was a part of the 2V8 crew which earned{" "}
                 <span className="font-medium text-foreground">
                   bronze at the 2025 IRA National Championships
                 </span>
                 , representing the culmination of our team's dedication and hard work. As a part of
-                the 1V this year, we recently won{" "}
-                <span className="font-medium text-foreground">Wahoo Henley</span> hosted by UVA Men's
-                Rowing.
+                the 1V, we won <span className="font-medium text-foreground">Wahoo Henley</span>{" "}
+                hosted by UVA Men's Rowing.
               </p>
               <a
                 href="https://gocolumbialions.com/news/2025/6/1/general-lightweight-2v8-crew-earns-bronze-on-final-day-of-ira-national-championships"
