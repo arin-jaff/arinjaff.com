@@ -1,27 +1,26 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import PageHeader from "../components/PageHeader";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center py-24 text-center">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <div className="text-8xl font-bold text-gray-200 mb-4">404</div>
-        <h2 className="text-2xl font-semibold text-brand-500 mb-2">Page Not Found</h2>
-        <p className="text-gray-500 mb-8 max-w-md">
+    <div className="mx-auto max-w-6xl py-6 md:py-8">
+      <PageHeader number="—" name="404" title="nothing filed here" />
+
+      <div className="max-w-3xl border-y border-border py-6">
+        <p className="text-sm text-muted-foreground">
           The page you're looking for doesn't exist or has been moved.
         </p>
-        <Link to="/" className="btn-primary inline-flex items-center gap-2">
-          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-          </svg>
-          Back to Home
+        <Link
+          to="/"
+          className="group mt-4 inline-flex items-center gap-2 text-sm transition-colors hover:text-accent"
+        >
+          <span className="font-mono transition-transform duration-200 group-hover:-translate-x-1">
+            ↖
+          </span>
+          back to index
         </Link>
-      </motion.div>
+      </div>
     </div>
   );
 }

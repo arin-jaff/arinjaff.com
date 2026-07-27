@@ -1,25 +1,40 @@
 import React from "react";
 import { profile } from "../data/profile";
-import ExperienceItem from "../components/ExperienceItem";
-import { motion } from "framer-motion";
+import PageHeader from "../components/PageHeader";
 
 export default function Experience() {
   return (
-    <section className="py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h2 className="section-title mb-2">Experience</h2>
-        <p className="text-gray-500 mb-8">Professional experience and internships</p>
-      </motion.div>
+    <div className="mx-auto max-w-6xl py-6 md:py-8">
+      <PageHeader number="01" name="experience" title="where i've worked" />
 
-      <div className="space-y-4">
-        {profile.experience.map((exp, i) => (
-          <ExperienceItem key={i} item={exp} index={i} />
-        ))}
+      <div className="max-w-3xl">
+        <h2 className="label-strong mb-3">professional experience and internships</h2>
+        <div className="divide-y divide-border border-y border-border">
+          {profile.experience.map((item, i) => (
+            <article key={item.company} className="py-5 md:py-6">
+              <div className="mb-2 flex flex-wrap items-baseline gap-4">
+                <span className="specimen-index">{String(i + 1).padStart(2, "0")}</span>
+                <span className="label">{item.location}</span>
+                <span className="label ml-auto">{item.period}</span>
+              </div>
+
+              <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
+                {item.title}
+              </h3>
+              <p className="mt-1 text-sm text-muted-foreground">{item.company}</p>
+
+              <ul className="mt-3 space-y-2">
+                {item.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3 text-sm text-muted-foreground">
+                    <span className="specimen-index shrink-0 pt-0.5">—</span>
+                    <span>{bullet}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </div>
       </div>
-    </section>
+    </div>
   );
 }
