@@ -6,6 +6,7 @@ export const profile = {
   phone: "(425) 229-1603",
   github: "https://github.com/arin-jaff",
   linkedin: "https://www.linkedin.com/in/arin-jaff-252977251/",
+  strava: "https://www.strava.com/athletes/44634937",
   headshot: "/headshot.jpeg",
   resume: "/Jaff_Arin_Resume.pdf",
   title: "AI-Fluent, Cloud-Native Software Engineer",

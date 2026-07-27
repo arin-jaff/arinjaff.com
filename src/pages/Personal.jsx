@@ -25,19 +25,33 @@ export default function Personal() {
       <PageHeader number="04" name="personal" title="beyond the code" />
 
       <div className="max-w-3xl">
-        <p className="mb-12 text-sm leading-relaxed text-muted-foreground">
+        <p className="mb-6 text-sm leading-relaxed text-muted-foreground">
           I love endurance sports. I am an ex-lightweight rower, and current runner and cyclist. I
           will do my first marathon in November (Seattle Marathon!!), and stay tuned for future
-          ventures into triathlons.{" "}
-          <a
-            href="https://www.strava.com/athletes/44634937"
-            target="_blank"
-            rel="noreferrer"
-            className="italic text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-accent"
-          >
-            Follow my Strava!
-          </a>
+          ventures into triathlons.
         </p>
+
+        <a
+          href={profile.strava}
+          target="_blank"
+          rel="noreferrer"
+          className="group mb-12 inline-flex items-center gap-4 border border-border bg-mount p-4 shadow-[0_2px_8px_-2px_var(--archive-shadow)] transition-colors hover:border-border-strong"
+        >
+          <img
+            src="/logos/strava.png"
+            alt="Strava"
+            className="size-11 shrink-0 rounded border border-border"
+          />
+          <span>
+            <span className="block font-display text-base italic leading-none">
+              Follow my Strava!
+            </span>
+            <span className="label mt-2 block">running · cycling · rowing</span>
+          </span>
+          <span className="ml-2 font-mono text-muted-foreground transition-transform duration-200 group-hover:translate-x-1">
+            ↗
+          </span>
+        </a>
 
         <div className="space-y-14">
           {categories.map(([key, category], i) => (
