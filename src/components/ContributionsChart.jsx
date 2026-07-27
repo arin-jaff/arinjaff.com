@@ -10,6 +10,13 @@ const BLUE = ["#91ceff", "#70a1fa", "#1b7ee0", "#1559ad"];
 const EMPTY = "var(--archive-empty-cell)";
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
 
+// Brackets under the calendar that explain a stretch of it. Matched on MM-DD so
+// they keep working as the rolling window moves.
+// The calendar is columned by week, so a range is rounded out to whole weeks —
+// ending on 05-30 keeps this to May's last two columns instead of spilling into
+// the week that carries May 31 into June.
+const ANNOTATIONS = [{ label: "rowing national championships!", from: "05-18", to: "05-30" }];
+
 // ponytail: a day picks one side rather than splitting the cell — blue once the
 // mirror accounts for at least half of it. Split cells if mixed days matter.
 function cellColor(day) {
@@ -60,6 +67,14 @@ export default function ContributionsChart() {
     return weeks[i - 1][0].date.slice(5, 7) === month ? null : MONTHS[Number(month) - 1];
   });
 
+  const brackets = ANNOTATIONS.map((note) => {
+    const covered = weeks.reduce((acc, week, i) => {
+      const hit = week.some((day) => day.date.slice(5) >= note.from && day.date.slice(5) <= note.to);
+      return hit ? { start: acc.start ?? i, end: i } : acc;
+    }, {});
+    return covered.start === undefined ? null : { ...note, ...covered };
+  }).filter(Boolean);
+
   return (
     <section aria-label="GitHub contributions">
       <h2 className="label-strong mb-3">contributions</h2>
@@ -70,7 +85,7 @@ export default function ContributionsChart() {
           <span className="label ml-auto">github · {data.username}</span>
         </div>
 
-        <div className="overflow-x-auto pb-1">
+        <div className="overflow-x-auto pb-8">
           <div className="inline-block">
             <div
               className="mb-1 grid gap-[3px]"
@@ -99,6 +114,26 @@ export default function ContributionsChart() {
                 />
               ))}
             </div>
+
+            {brackets.length > 0 && (
+              <div
+                className="mt-1.5 grid gap-[3px]"
+                style={{ gridTemplateColumns: `repeat(${weeks.length}, 10px)` }}
+              >
+                {brackets.map((note) => (
+                  <div
+                    key={note.label}
+                    className="relative"
+                    style={{ gridColumn: `${note.start + 1} / ${note.end + 2}` }}
+                  >
+                    <div className="h-1.5 border-x border-b border-border-strong" />
+                    <span className="label absolute left-1/2 top-full mt-1.5 -translate-x-1/2 whitespace-nowrap text-foreground">
+                      {note.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
 
