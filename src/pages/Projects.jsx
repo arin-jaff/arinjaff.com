@@ -105,7 +105,7 @@ export default function Projects() {
 
   return (
     <div className="mx-auto max-w-6xl py-6 md:py-8">
-      <PageHeader number="02" name="projects" title="things made" />
+      <PageHeader title="things made" />
 
       <div className="max-w-3xl space-y-14">
         {featured.length > 0 && (

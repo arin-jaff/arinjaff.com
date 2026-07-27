@@ -5,7 +5,7 @@ import PageHeader from "../components/PageHeader";
 export default function NotFound() {
   return (
     <div className="mx-auto max-w-6xl py-6 md:py-8">
-      <PageHeader number="—" name="404" title="nothing filed here" />
+      <PageHeader title="nothing filed here" />
 
       <div className="max-w-3xl border-y border-border py-6">
         <p className="text-sm text-muted-foreground">

@@ -6,7 +6,7 @@ import CompanyLogo from "../components/CompanyLogo";
 export default function Experience() {
   return (
     <div className="mx-auto max-w-6xl py-6 md:py-8">
-      <PageHeader number="01" name="experience" title="where i've worked" />
+      <PageHeader title="where i've worked" />
 
       <div className="max-w-3xl">
         <h2 className="label-strong mb-3">professional experience and internships</h2>
