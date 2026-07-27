@@ -14,10 +14,7 @@ const index = [
 ];
 
 // Dates and titles come from the resume data so the two can't drift apart.
-const now = [
-  { company: "Phia", short: "Phia" },
-  { company: "Columbia University Computer Science", short: "Columbia University CS" }
-].map(({ company, short }) => {
+const now = [{ company: "Phia", short: "Phia" }].map(({ company, short }) => {
   const role = profile.experience.find((item) => item.company === company);
   return { org: short, when: role.period, detail: role.title };
 });
