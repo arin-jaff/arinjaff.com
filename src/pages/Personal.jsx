@@ -26,11 +26,17 @@ export default function Personal() {
 
       <div className="max-w-3xl">
         <p className="mb-12 text-sm leading-relaxed text-muted-foreground">
-          Beyond software engineering, I am deeply involved in athletics, music, and community
-          leadership. As a D1 rower at Columbia, I balance the demands of competitive athletics with
-          academic excellence. My diverse interests—from performing jazz music to leading Eagle Scout
-          projects—shape my approach to problem-solving and teamwork in both technical and personal
-          pursuits.
+          I love endurance sports. I am an ex-lightweight rower, and current runner and cyclist. I
+          will do my first marathon in November (Seattle Marathon!!), and stay tuned for future
+          ventures into triathlons.{" "}
+          <a
+            href="https://www.strava.com/athletes/44634937"
+            target="_blank"
+            rel="noreferrer"
+            className="italic text-foreground underline decoration-border underline-offset-4 transition-colors hover:text-accent"
+          >
+            Follow my Strava!
+          </a>
         </p>
 
         <div className="space-y-14">
