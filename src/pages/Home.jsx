@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { profile } from "../data/profile";
 import { GithubIcon, LinkedinIcon, MailIcon, MapPinIcon, FileTextIcon } from "../components/icons";
+import ContributionsChart from "../components/ContributionsChart";
 import wahooHenley from "../assets/WahooHenley.jpeg";
 
 const index = [
@@ -133,9 +134,11 @@ export default function Home() {
       </div>
 
       <div className="mt-16 max-w-4xl space-y-14">
+        <ContributionsChart />
+
         <section aria-label="Athletics">
           <h2 className="label-strong mb-3">athletics</h2>
-          <div className="grid gap-8 border-y border-border py-6 md:grid-cols-2 md:items-center">
+          <div className="grid gap-8 border-y border-border py-6 md:grid-cols-2 md:items-start">
             <div>
               <p className="text-sm leading-relaxed text-muted-foreground">
                 I am a <span className="font-medium text-foreground">D1 athlete</span> competing for
