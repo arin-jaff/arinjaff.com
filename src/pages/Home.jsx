@@ -13,6 +13,22 @@ const index = [
   { number: "05", label: "github", href: profile.github }
 ];
 
+const now = [
+  { kind: "current role", when: "present", org: "Phia", detail: "Software Engineer, GTM" },
+  {
+    kind: "current role",
+    when: "present",
+    org: "Columbia University CS",
+    detail: "Teaching Assistant, Cloud Computing"
+  },
+  {
+    kind: "upcoming role",
+    when: "2026",
+    org: "Garmin",
+    detail: "Software Engineer I — Full-Time, 2026— (Intern Summer 2025)"
+  }
+];
+
 const rowClass =
   "group grid grid-cols-[34px_1fr_auto] items-center gap-3 py-3.5 transition-colors hover:bg-paper-deep";
 
@@ -182,30 +198,19 @@ export default function Home() {
         <section aria-label="Now">
           <h2 className="label-strong mb-3">now</h2>
           <div className="divide-y divide-border border-y border-border">
-            <div className="py-5 md:py-6">
-              <div className="mb-2 flex items-baseline gap-4">
-                <span className="specimen-index">01</span>
-                <span className="label">current role</span>
-                <span className="label ml-auto">present</span>
+            {now.map((role, i) => (
+              <div key={role.org} className="py-5 md:py-6">
+                <div className="mb-2 flex items-baseline gap-4">
+                  <span className="specimen-index">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="label">{role.kind}</span>
+                  <span className="label ml-auto">{role.when}</span>
+                </div>
+                <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
+                  {role.org}
+                </h3>
+                <p className="mt-1 text-sm text-muted-foreground">{role.detail}</p>
               </div>
-              <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
-                Teaching Assistant, Cloud Computing
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">Columbia University CS</p>
-            </div>
-            <div className="py-5 md:py-6">
-              <div className="mb-2 flex items-baseline gap-4">
-                <span className="specimen-index">02</span>
-                <span className="label">upcoming role</span>
-                <span className="label ml-auto">2026</span>
-              </div>
-              <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
-                Garmin Software Engineer I
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">
-                Full-Time, 2026— (Intern Summer 2025)
-              </p>
-            </div>
+            ))}
           </div>
         </section>
 

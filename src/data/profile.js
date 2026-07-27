@@ -19,6 +19,17 @@ export const profile = {
   },
   experience: [
     {
+      company: "Phia",
+      title: "Software Engineer, GTM",
+      location: "New York, NY",
+      period: "Feb 2026 — Present",
+      bullets: [
+        "Designed and launched the company's first MCP servers (Docker/Cloud Run, Terraform), exposing internal CRM and analytics databases to LLM agents; auth and routing conventions adopted by all subsequent internal AI services.",
+        "Sole owner of the customer-facing self-serve web platform (Next.js/Vercel, Supabase) serving 1,000+ brand partners, plus automated performance reports built on live data from 20+ affiliate network APIs.",
+        "Built a headless rendering service producing pixel-accurate iOS app screenshots, exposed as an MCP tool powering AI email automation that cut response turnaround 30%+."
+      ]
+    },
+    {
       company: "Columbia University Computer Science",
       title: "Teaching Assistant, Cloud Computing",
       location: "New York, NY",
