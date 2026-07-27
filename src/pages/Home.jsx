@@ -67,8 +67,9 @@ export default function Home() {
               />
             </div>
             <div className="min-w-[14rem] flex-1">
-              <p className="label mb-3">arin kosar jaff</p>
-              <h1 className="font-display text-2xl leading-none md:text-3xl">{profile.title}</h1>
+              <p className="label mb-3">folder 00 · index</p>
+              <h1 className="font-display text-2xl leading-none md:text-3xl">{profile.name}</h1>
+              <p className="mt-3 text-sm md:text-base">{profile.title}</p>
 
               <div className="mt-5 space-y-1.5 text-sm text-muted-foreground">
                 <p className="flex items-center gap-2">
