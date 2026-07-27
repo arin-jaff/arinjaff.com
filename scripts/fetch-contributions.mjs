@@ -18,7 +18,6 @@ import { fileURLToPath } from "node:url";
 const USER = process.env.GITHUB_USER ?? "arin-jaff";
 const PHIA_REPO = process.env.PHIA_REPO ?? `${USER}/phia-work-mirror`;
 const TOKEN = process.env.GITHUB_TOKEN;
-const WEEKS = 53;
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/contributions.json");
 
 const iso = (date) => date.toISOString().slice(0, 10);
@@ -82,22 +81,22 @@ async function phiaCommitsByDay() {
   return perDay;
 }
 
-// Rolling window of whole Sun–Sat weeks ending with the current one, like the
-// graph on a GitHub profile.
+// Year to date: 1 January through today, columned into Sun–Sat weeks.
 function windowDates() {
   const end = new Date(`${iso(new Date())}T00:00:00Z`);
-  end.setUTCDate(end.getUTCDate() + (6 - end.getUTCDay()));
-  const dates = [];
-  for (let i = WEEKS * 7 - 1; i >= 0; i--) {
-    const day = new Date(end);
-    day.setUTCDate(day.getUTCDate() - i);
+  const start = new Date(Date.UTC(end.getUTCFullYear(), 0, 1));
+
+  // Blank leads so 1 January lands on its real weekday row; the trailing
+  // partial week needs no padding because columns fill top-down.
+  const dates = Array.from({ length: start.getUTCDay() }, () => null);
+  for (const day = new Date(start); day <= end; day.setUTCDate(day.getUTCDate() + 1)) {
     dates.push(iso(day));
   }
   return dates;
 }
 
 const dates = windowDates();
-const years = new Set(dates.map((date) => date.slice(0, 4)));
+const years = new Set(dates.filter(Boolean).map((date) => date.slice(0, 4)));
 
 const calendar = new Map();
 for (const year of years) {
@@ -117,14 +116,14 @@ const [t1, t2, t3] = [quartile(0.25), quartile(0.5), quartile(0.75)];
 const phiaLevel = (n) => (n === 0 ? 0 : n <= t1 ? 1 : n <= t2 ? 2 : n <= t3 ? 3 : 4);
 
 const days = dates.map((date) => {
+  if (!date) return { date: null, pad: true, count: 0, level: 0, phia: 0 };
   const { count = 0, level = 0 } = calendar.get(date) ?? {};
   const phiaCount = phia.get(date) ?? 0;
   return {
     date,
     count,
     level: phiaCount > 0 ? Math.max(level, phiaLevel(phiaCount)) : level,
-    phia: phiaCount,
-    ...(date > today ? { future: true } : {})
+    phia: phiaCount
   };
 });
 
@@ -132,7 +131,7 @@ const data = {
   username: USER,
   repo: PHIA_REPO,
   generated: today,
-  weeks: WEEKS,
+  year: Number(today.slice(0, 4)),
   total: days.reduce((sum, day) => sum + day.count, 0),
   phiaTotal: days.reduce((sum, day) => sum + day.phia, 0),
   days

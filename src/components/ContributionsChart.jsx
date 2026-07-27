@@ -20,6 +20,7 @@ const ANNOTATIONS = [{ label: "rowing national championships!", from: "05-18", t
 // ponytail: a day picks one side rather than splitting the cell — blue once the
 // mirror accounts for at least half of it. Split cells if mixed days matter.
 function cellColor(day) {
+  if (day.pad) return "transparent";
   if (!day.level) return EMPTY;
   return (day.phia * 2 >= day.count ? BLUE : GREEN)[day.level - 1];
 }
@@ -59,17 +60,25 @@ export default function ContributionsChart() {
   const weeks = [];
   for (let i = 0; i < data.days.length; i += 7) weeks.push(data.days.slice(i, i + 7));
 
-  // Label a column when a new month starts in it, skipping the leading partial
-  // week and the last column so labels never collide.
+  // A column's month is the first real day in it — the first week can open with
+  // blank padding before 1 January.
+  const monthOf = (week) => week.find((day) => day.date)?.date.slice(5, 7);
+
+  // Label a column when a new month starts in it, skipping the last column so
+  // labels never collide.
   const monthLabels = weeks.map((week, i) => {
-    if (i === 0 || i === weeks.length - 1) return null;
-    const month = week[0].date.slice(5, 7);
-    return weeks[i - 1][0].date.slice(5, 7) === month ? null : MONTHS[Number(month) - 1];
+    if (i === weeks.length - 1) return null;
+    const month = monthOf(week);
+    return !month || (i > 0 && monthOf(weeks[i - 1]) === month)
+      ? null
+      : MONTHS[Number(month) - 1];
   });
 
   const brackets = ANNOTATIONS.map((note) => {
     const covered = weeks.reduce((acc, week, i) => {
-      const hit = week.some((day) => day.date.slice(5) >= note.from && day.date.slice(5) <= note.to);
+      const hit = week.some(
+        (day) => day.date && day.date.slice(5) >= note.from && day.date.slice(5) <= note.to
+      );
       return hit ? { start: acc.start ?? i, end: i } : acc;
     }, {});
     return covered.start === undefined ? null : { ...note, ...covered };
@@ -81,7 +90,7 @@ export default function ContributionsChart() {
       <div className="border-y border-border py-6">
         <div className="mb-4 flex flex-wrap items-baseline gap-4">
           <span className="specimen-index">{data.total}</span>
-          <span className="label">public contributions in the last year</span>
+          <span className="label">public contributions in {data.year}</span>
           <span className="label ml-auto">github · {data.username}</span>
         </div>
 
@@ -102,13 +111,15 @@ export default function ContributionsChart() {
               className="grid gap-[3px]"
               style={{ gridAutoFlow: "column", gridTemplateRows: "repeat(7, 10px)" }}
             >
-              {data.days.map((day) => (
+              {data.days.map((day, i) => (
                 <span
-                  key={day.date}
+                  key={day.date ?? `pad-${i}`}
                   className="h-[10px] w-[10px] rounded-[2px]"
                   title={
-                    `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}` +
-                    (day.phia ? ` · ${day.phia} in ${data.repo}` : "")
+                    day.pad
+                      ? undefined
+                      : `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}` +
+                        (day.phia ? ` · ${day.phia} in ${data.repo}` : "")
                   }
                   style={{ backgroundColor: cellColor(day) }}
                 />

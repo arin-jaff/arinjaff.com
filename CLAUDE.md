@@ -54,6 +54,9 @@ The token must belong to **`arin-jaff`** — `arin-phia` and `arin-ornn` get a 4
 returns 404 (not 403) for private repos an account can't see, so an access failure looks identical
 to a missing repo.
 
+The calendar is year-to-date: 1 January through today, with blank cells padding the first week
+so 1 January lands on its real weekday.
+
 The mirror's commits mostly don't appear in the public contributions calendar, so the blue ramp is
 scaled by quartiles over the mirror's *own* commit counts. Without that, every phia day collapses
 to the palest shade. The headline number is GitHub's public count and deliberately excludes the
