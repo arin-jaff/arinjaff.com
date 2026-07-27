@@ -107,15 +107,22 @@ for (const year of years) {
 const phia = await phiaCommitsByDay();
 const today = iso(new Date());
 
+// A private mirror's commits are usually missing from the public calendar, so
+// its days would all collapse to the palest shade. Give the blue ramp its own
+// scale, quartiles over the mirror's own commit counts, so a 30-commit day
+// reads darker than a 1-commit day.
+const phiaCounts = [...phia.values()].filter(Boolean).sort((a, b) => a - b);
+const quartile = (p) => phiaCounts[Math.floor((phiaCounts.length - 1) * p)] ?? 0;
+const [t1, t2, t3] = [quartile(0.25), quartile(0.5), quartile(0.75)];
+const phiaLevel = (n) => (n === 0 ? 0 : n <= t1 ? 1 : n <= t2 ? 2 : n <= t3 ? 3 : 4);
+
 const days = dates.map((date) => {
   const { count = 0, level = 0 } = calendar.get(date) ?? {};
   const phiaCount = phia.get(date) ?? 0;
   return {
     date,
     count,
-    // A private mirror's commits may not show up in the public calendar at all,
-    // so a phia day always renders as at least level 1.
-    level: phiaCount > 0 ? Math.max(level, 1) : level,
+    level: phiaCount > 0 ? Math.max(level, phiaLevel(phiaCount)) : level,
     phia: phiaCount,
     ...(date > today ? { future: true } : {})
   };

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { profile } from "../data/profile";
 import { GithubIcon, LinkedinIcon, MailIcon, MapPinIcon, FileTextIcon } from "../components/icons";
 import ContributionsChart from "../components/ContributionsChart";
+import CompanyLogo from "../components/CompanyLogo";
 import wahooHenley from "../assets/WahooHenley.jpeg";
 
 const index = [
@@ -13,11 +14,8 @@ const index = [
   { number: "05", label: "github", href: profile.github }
 ];
 
-// Dates and titles come from the resume data so the two can't drift apart.
-const now = [{ company: "Phia", short: "Phia" }].map(({ company, short }) => {
-  const role = profile.experience.find((item) => item.company === company);
-  return { org: short, when: role.period, detail: role.title };
-});
+// Pulled from the resume data so the two can't drift apart.
+const current = profile.experience.find((item) => item.company === "Phia");
 
 const rowClass =
   "group grid grid-cols-[34px_1fr_auto] items-center gap-3 py-3.5 transition-colors hover:bg-paper-deep";
@@ -147,16 +145,19 @@ export default function Home() {
 
           <div>
             <p className="label-strong mb-3 block">now</p>
-            <div className="divide-y divide-border border-y border-border">
-              {now.map((role) => (
-                <div key={role.org} className="py-3.5">
-                  <div className="flex items-baseline justify-between gap-3">
-                    <span className="font-display text-sm leading-none">{role.org}</span>
-                    <span className="label shrink-0">{role.when}</span>
-                  </div>
-                  <p className="mt-1.5 text-sm text-muted-foreground">{role.detail}</p>
+            <div className="border border-border bg-mount p-6 shadow-[0_2px_8px_-2px_var(--archive-shadow)]">
+              <div className="flex items-center gap-4">
+                <CompanyLogo
+                  company={current.company}
+                  logo={current.logo}
+                  className="size-14"
+                />
+                <div className="min-w-0">
+                  <h2 className="font-display text-xl leading-tight">{current.company}</h2>
+                  <p className="mt-1 text-sm text-muted-foreground">{current.title}</p>
                 </div>
-              ))}
+              </div>
+              <p className="label mt-5 block border-t border-border pt-4">{current.period}</p>
             </div>
           </div>
         </div>

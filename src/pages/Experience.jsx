@@ -1,6 +1,7 @@
 import React from "react";
 import { profile } from "../data/profile";
 import PageHeader from "../components/PageHeader";
+import CompanyLogo from "../components/CompanyLogo";
 
 export default function Experience() {
   return (
@@ -18,10 +19,13 @@ export default function Experience() {
                 <span className="label ml-auto">{item.period}</span>
               </div>
 
-              <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
-                {item.company}
-              </h3>
-              <p className="mt-1 text-sm text-muted-foreground">{item.title}</p>
+              <div className="flex items-center gap-3">
+                <CompanyLogo company={item.company} logo={item.logo} className="size-9" />
+                <h3 className="font-display text-base leading-tight tracking-tight md:text-lg">
+                  {item.company}
+                </h3>
+              </div>
+              <p className="mt-2 text-sm text-muted-foreground">{item.title}</p>
               {item.summary && <p className="label mt-2 block">{item.summary}</p>}
 
               <ul className="mt-3 space-y-2">

@@ -62,7 +62,7 @@ export default function ContributionsChart() {
       <div className="border-y border-border py-6">
         <div className="mb-4 flex flex-wrap items-baseline gap-4">
           <span className="specimen-index">{data.total}</span>
-          <span className="label">contributions in the last year</span>
+          <span className="label">public contributions in the last year</span>
           <span className="label ml-auto">github · {data.username}</span>
         </div>
 

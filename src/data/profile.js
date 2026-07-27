@@ -29,6 +29,7 @@ export const profile = {
   experience: [
     {
       company: "Phia",
+      logo: "/logos/phia.svg",
       title: "Software Engineer, Core Platform",
       summary: "Translating business workflows into production AI systems",
       location: "New York, NY",
@@ -42,6 +43,7 @@ export const profile = {
     },
     {
       company: "Columbia University Computer Science",
+      logo: "/logos/columbia.png",
       title: "Teaching Assistant, Cloud Computing",
       summary: "Course staff for cloud computing",
       location: "New York, NY",
@@ -53,6 +55,7 @@ export const profile = {
     },
     {
       company: "Garmin Ltd.",
+      logo: "/logos/garmin.png",
       title: "Software Engineer Intern, Device Interactions",
       summary: "Wearables backend & public API infrastructure",
       location: "Olathe, KS",
@@ -77,6 +80,7 @@ export const profile = {
     },
     {
       company: "University of Chicago, Prof. John List",
+      logo: "/logos/uchicago.png",
       title: "Research Assistant",
       summary: "Behavioral economics research & data automation",
       location: "Chicago, IL",
