@@ -140,6 +140,18 @@
     color: var(--color-foreground);
   }
 
+  /* Every section heading is tagged in its folder's colour, so each page
+     carries the tab it sits under. --folder-color inherits from the layer. */
+  .label-strong::before {
+    content: "";
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    margin-right: 9px;
+    vertical-align: 1px;
+    background: var(--folder-color, var(--color-border-strong));
+  }
+
   .specimen-index {
     font-family: theme("fontFamily.mono");
     font-size: 11px;

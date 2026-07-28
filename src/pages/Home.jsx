@@ -129,6 +129,20 @@ export default function Home() {
               computing.
             </p>
             <p>
+              {/* Mounted like a print stuck to the page, so the block of copy
+                  breaks up instead of running flat to the margin. */}
+              <a
+                href="https://traininggeeks.net"
+                target="_blank"
+                rel="noreferrer"
+                className="archive-mat float-right ml-5 mt-1 block w-20 -rotate-2 transition-transform duration-200 hover:rotate-0 sm:w-24"
+              >
+                <img
+                  src="/traininggeeks.png"
+                  alt="TrainingGeeks"
+                  className="aspect-square w-full object-cover object-left"
+                />
+              </a>
               I am working on several projects, including{" "}
               <a
                 href="https://traininggeeks.net"
