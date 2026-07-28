@@ -235,7 +235,7 @@ export const profile = {
           text: "IRA National Rowing Championship Medalist — Bronze, Columbia Lightweight Varsity Crew, May 2025",
           link: { url: "https://gocolumbialions.com/news/2025/6/1/general-lightweight-2v8-crew-earns-bronze-on-final-day-of-ira-national-championships", label: "Read More" }
         },
-        { text: "Maintained a 3.82 GPA while managing a 40+ hr/week athletic time commitment" }
+        { text: "Maintained a 4.0+ GPA while managing a 40+ hr/week athletic time commitment" }
       ]
     },
     music: {

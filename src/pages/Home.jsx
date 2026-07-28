@@ -131,16 +131,25 @@ export default function Home() {
             <p>
               I am working on several projects, including{" "}
               <a
-                href="https://ergroom.arinjaff.com"
+                href="https://traininggeeks.net"
                 target="_blank"
                 rel="noreferrer"
                 className="underline decoration-border underline-offset-4 transition-colors hover:text-accent"
               >
-                Who's in the Erg Room?
+                TrainingGeeks
               </a>{" "}
-              — an RFID attendance system for Columbia Lightweight Rowing which uses a Raspberry Pi,
-              RFID module, and a Flask application to show real-time erg room occupancy. Check out my
-              other projects and prior experience!
+              — an open-source, self-hosted endurance and strength analytics platform that keeps all
+              your training data on your own machine. Check out a{" "}
+              <a
+                href="https://demo.traininggeeks.net"
+                target="_blank"
+                rel="noreferrer"
+                className="underline decoration-border underline-offset-4 transition-colors hover:text-accent"
+              >
+                live demo here
+              </a>
+              , running my own training history off a Raspberry Pi at home. Have a look at my other
+              projects and prior experience!
             </p>
           </div>
         </div>
