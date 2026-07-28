@@ -4,6 +4,7 @@ import PageHeader from "../components/PageHeader";
 import { GithubIcon, ExternalLinkIcon, FileTextIcon } from "../components/icons";
 
 function status(project) {
+  if (project.closed) return "closed-source";
   if (project.wip) return "wip";
   if (project.url) return "live";
   return "source";
@@ -53,7 +54,13 @@ function ProjectRow({ project, number }) {
               {project.title}
             </h3>
             {project.featured && (
-              <span className="label rounded-full bg-accent px-2.5 py-1 text-background">
+              <span
+                className="label rounded-full px-2.5 py-1"
+                style={{
+                  backgroundColor: "var(--folder-color)",
+                  color: "var(--archive-tab-ink)"
+                }}
+              >
                 featured
               </span>
             )}

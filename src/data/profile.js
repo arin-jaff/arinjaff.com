@@ -119,6 +119,15 @@ export const profile = {
         "New York's transit infrastructure rendered as a glowing organism. Six live feeds animate on one canvas — subway trains snapping between stations, Citi Bike pulses radiating from each real GBFS checkout, Manhattan buses threading the street grid, commuter rail shooting out of midtown, ferries cutting the East River, and aircraft arcing over all of it. Trails decay on a configurable window and garbage-collect behind a 60 FPS target, over a CartoDB dark-matter basemap with four palettes (realistic MTA route colors, cyberpunk, monochrome, heatmap)."
     },
     {
+      id: "peach-telemetry",
+      title: "Advanced Peach Telemetry Analysis Software",
+      tagline: "Columbia Lightweight Rowing Software",
+      closed: true,
+      tech: ["React", "TypeScript", "FastAPI", "SQLite", "Recharts", "Zustand", "Tailwind CSS"],
+      description:
+        "Closed-source analysis software built for the Columbia Lightweight Rowing team, turning raw Peach PowerLine telemetry into coaching feedback. A FastAPI service parses the Peach CSV export into a queryable session → piece → stroke model; the front end charts per-athlete power, catch and finish angles, boat speed and rating, and per-stroke force curves across all eight seats, with athlete toggles and a stroke timeline for scrubbing a piece. The video analysis view syncs on-water footage to the telemetry: the offset auto-aligns video t=0 to the first stroke, a drag calibration persists per video, and a requestAnimationFrame loop walks a marker across the charts as the video plays — with variable playback speed, jump-to-stroke, and a prefetching force-curve cache so scrubbing stays smooth."
+    },
+    {
       id: "ergroom",
       title: "Who's In the Erg Room?",
       tagline: "RFID-based attendance system for Columbia Lightweight Rowing",
