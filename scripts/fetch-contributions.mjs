@@ -2,23 +2,40 @@
 // Builds public/contributions.json for <ContributionsChart>.
 //
 // Day totals come from scraping GitHub's own contributions calendar — the same
-// source sallar/github-contributions-chart uses. Per-day commit counts for the
-// phia work mirror come from the REST API, so those days can be tinted blue
-// instead of green.
+// source sallar/github-contributions-chart uses. Per-day commit counts for work
+// mirrors come from either the REST API (a private mirror repo) or `git log` on
+// a local clone, so those days can be tinted instead of green.
 //
 // Usage:  npm run contributions
-//   GITHUB_USER   profile to chart          (default: arin-jaff)
-//   PHIA_REPO     owner/name of the mirror  (default: <user>/phia-work-mirror)
-//   GITHUB_TOKEN  required only if the mirror is private (`gh auth token`)
+//   GITHUB_USER      profile to chart          (default: arin-jaff)
+//   PHIA_REPO        owner/name of the mirror  (default: <user>/phia-work-mirror)
+//   GITHUB_TOKEN     required only if PHIA_REPO is private (`gh auth token`)
+//   ORNN_LOCAL_REPOS comma-separated local clones to scan  (default: ornn-data, fabric)
+//   ORNN_AUTHOR      git log --author filter for those clones (default: arin@ornn.com)
 
+import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const USER = process.env.GITHUB_USER ?? "arin-jaff";
-const PHIA_REPO = process.env.PHIA_REPO ?? `${USER}/phia-work-mirror`;
 const TOKEN = process.env.GITHUB_TOKEN;
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/contributions.json");
+
+const ORNN_ROOT = "/Users/arinjaff/Documents/gh_repos/arin-ornn";
+
+// Each mirror tints its majority days with its own ramp — see ContributionsChart.
+// phia comes from a private GitHub mirror repo; ornn has no mirror, so it's read
+// straight out of local clones by author email instead.
+const MIRRORS = [
+  { key: "phia", source: "github", repo: process.env.PHIA_REPO ?? `${USER}/phia-work-mirror` },
+  {
+    key: "ornn",
+    source: "local",
+    paths: (process.env.ORNN_LOCAL_REPOS ?? `${ORNN_ROOT}/ornn-data,${ORNN_ROOT}/fabric`).split(","),
+    author: process.env.ORNN_AUTHOR ?? "arin@ornn.com"
+  }
+];
 
 const iso = (date) => date.toISOString().slice(0, 10);
 const nextPage = (link) => /<([^>]+)>;\s*rel="next"/.exec(link ?? "")?.[1] ?? null;
@@ -49,21 +66,21 @@ async function calendarYear(year) {
   return days;
 }
 
-async function phiaCommitsByDay() {
+async function mirrorCommitsByDay(repo) {
   const perDay = new Map();
   const headers = {
     accept: "application/vnd.github+json",
     ...(TOKEN ? { authorization: `Bearer ${TOKEN}` } : {})
   };
 
-  let url = `https://api.github.com/repos/${PHIA_REPO}/commits?per_page=100`;
+  let url = `https://api.github.com/repos/${repo}/commits?per_page=100`;
   while (url) {
     const res = await fetch(url, { headers });
     if (res.status === 404) {
       // GitHub returns 404 rather than 403 for private repos you cannot see,
       // so a token that lacks access looks identical to a missing repo.
       console.warn(
-        `! ${PHIA_REPO} not reachable — every day stays green.\n  ` +
+        `! ${repo} not reachable — every day stays green.\n  ` +
           (TOKEN
             ? "The token authenticated, but this account cannot see that repo. Use a token from the account that owns it."
             : "If the repo is private, pass a token: GITHUB_TOKEN=$(gh auth token) npm run contributions")
@@ -79,6 +96,42 @@ async function phiaCommitsByDay() {
     url = nextPage(res.headers.get("link"));
   }
   return perDay;
+}
+
+// Counts commits by day straight from a local clone — no mirror repo, no
+// token, just `git log` filtered to one author across every branch. A missing
+// clone (wrong machine, moved checkout) warns and contributes 0 rather than
+// failing the whole script — same posture as a 404 on a GitHub mirror.
+function localCommitsByDay({ paths, author }) {
+  const perDay = new Map();
+  for (const path of paths) {
+    let out;
+    try {
+      out = execFileSync(
+        "git",
+        ["log", "--all", `--author=${author}`, "--date=short", "--format=%ad"],
+        { cwd: path, encoding: "utf8" }
+      );
+    } catch (err) {
+      console.warn(`! ${path} not readable — contributes 0 commits.\n  ${err.message.split("\n")[0]}`);
+      continue;
+    }
+    for (const date of out.split("\n").filter(Boolean)) {
+      perDay.set(date, (perDay.get(date) ?? 0) + 1);
+    }
+  }
+  return perDay;
+}
+
+// A private mirror's commits are usually missing from the public calendar, so
+// its days would all collapse to the palest shade. Give each mirror's ramp its
+// own scale, quartiles over that mirror's own commit counts, so a 30-commit
+// day reads darker than a 1-commit day.
+function levelFor(counts) {
+  const sorted = [...counts.values()].filter(Boolean).sort((a, b) => a - b);
+  const quartile = (p) => sorted[Math.floor((sorted.length - 1) * p)] ?? 0;
+  const [t1, t2, t3] = [quartile(0.25), quartile(0.5), quartile(0.75)];
+  return (n) => (n === 0 ? 0 : n <= t1 ? 1 : n <= t2 ? 2 : n <= t3 ? 3 : 4);
 }
 
 // Year to date: 1 January through today, columned into Sun–Sat weeks.
@@ -103,41 +156,43 @@ for (const year of years) {
   for (const day of await calendarYear(year)) calendar.set(day.date, day);
 }
 
-const phia = await phiaCommitsByDay();
+const mirrors = await Promise.all(
+  MIRRORS.map(async (m) => {
+    const counts =
+      m.source === "local" ? localCommitsByDay(m) : await mirrorCommitsByDay(m.repo);
+    const label = m.source === "local" ? m.paths.map((p) => p.split("/").at(-1)).join(" + ") : m.repo;
+    return { ...m, counts, label, level: levelFor(counts) };
+  })
+);
 const today = iso(new Date());
 
-// A private mirror's commits are usually missing from the public calendar, so
-// its days would all collapse to the palest shade. Give the blue ramp its own
-// scale, quartiles over the mirror's own commit counts, so a 30-commit day
-// reads darker than a 1-commit day.
-const phiaCounts = [...phia.values()].filter(Boolean).sort((a, b) => a - b);
-const quartile = (p) => phiaCounts[Math.floor((phiaCounts.length - 1) * p)] ?? 0;
-const [t1, t2, t3] = [quartile(0.25), quartile(0.5), quartile(0.75)];
-const phiaLevel = (n) => (n === 0 ? 0 : n <= t1 ? 1 : n <= t2 ? 2 : n <= t3 ? 3 : 4);
-
 const days = dates.map((date) => {
-  if (!date) return { date: null, pad: true, count: 0, level: 0, phia: 0 };
+  if (!date) {
+    return { date: null, pad: true, count: 0, level: 0, ...Object.fromEntries(mirrors.map((m) => [m.key, 0])) };
+  }
   const { count = 0, level = 0 } = calendar.get(date) ?? {};
-  const phiaCount = phia.get(date) ?? 0;
+  const mirrorCounts = mirrors.map((m) => m.counts.get(date) ?? 0);
+  const mirrorLevels = mirrors.map((m, i) => m.level(mirrorCounts[i]));
   return {
     date,
     count,
-    level: phiaCount > 0 ? Math.max(level, phiaLevel(phiaCount)) : level,
-    phia: phiaCount
+    level: Math.max(level, ...mirrorLevels),
+    ...Object.fromEntries(mirrors.map((m, i) => [m.key, mirrorCounts[i]]))
   };
 });
 
 const data = {
   username: USER,
-  repo: PHIA_REPO,
+  repos: Object.fromEntries(mirrors.map((m) => [m.key, m.label])),
   generated: today,
   year: Number(today.slice(0, 4)),
   total: days.reduce((sum, day) => sum + day.count, 0),
-  phiaTotal: days.reduce((sum, day) => sum + day.phia, 0),
+  totals: Object.fromEntries(mirrors.map((m) => [m.key, days.reduce((sum, day) => sum + day[m.key], 0)])),
   days
 };
 
 await writeFile(OUT, `${JSON.stringify(data)}\n`);
 console.log(
-  `${OUT}: ${data.days.length} days, ${data.total} contributions, ${data.phiaTotal} from ${PHIA_REPO}`
+  `${OUT}: ${data.days.length} days, ${data.total} contributions, ` +
+    mirrors.map((m) => `${data.totals[m.key]} from ${m.label}`).join(", ")
 );

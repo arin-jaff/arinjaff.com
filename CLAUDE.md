@@ -44,25 +44,38 @@ isn't. Don't delete projects to match it.
 ## Contributions graph
 
 `ContributionsChart` reads `public/contributions.json`, a snapshot committed to the repo. Classic
-GitHub green for personal work; **blue for commits in `arin-jaff/phia-work-mirror`** (private).
+GitHub green for personal work; **blue for commits in `arin-jaff/phia-work-mirror`** (private);
+**grey/black for Ornn commits**, read straight from local clones instead of a mirror repo (Ornn's
+own repos are private company repos `arin-jaff` has no GitHub-visible mirror of).
+`scripts/fetch-contributions.mjs` drives both sources off one `MIRRORS` array — a third source is
+a one-line addition there plus a new ramp + legend entry in `ContributionsChart`.
 
 ```
 GITHUB_TOKEN=$(gh auth token -u arin-jaff) npm run contributions
 ```
 
-The token must belong to **`arin-jaff`** — `arin-phia` and `arin-ornn` get a 404, and GitHub
+phia's token must belong to **`arin-jaff`** — `arin-phia` and `arin-ornn` get a 404, and GitHub
 returns 404 (not 403) for private repos an account can't see, so an access failure looks identical
-to a missing repo.
+to a missing repo. No special scope is needed beyond read access to the mirror repo (classic PAT
+`repo` scope, or fine-grained Contents: Read-only). Override the default with `PHIA_REPO` if it
+doesn't live under `arin-jaff`.
+
+ornn needs no token or mirror repo at all: `localCommitsByDay` runs `git log --all --author=…` on
+local clones (default `~/Documents/gh_repos/arin-ornn/{ornn-data,fabric}`, override with
+`ORNN_LOCAL_REPOS` — comma-separated paths — and `ORNN_AUTHOR`). This only works on a machine that
+has those clones checked out; running from anywhere else just warns and gets a 0-commit ornn source
+instead of failing the whole script.
 
 The calendar is year-to-date: 1 January through today, with blank cells padding the first week
 so 1 January lands on its real weekday.
 
-The mirror's commits mostly don't appear in the public contributions calendar, so the blue ramp is
-scaled by quartiles over the mirror's *own* commit counts. Without that, every phia day collapses
-to the palest shade. The headline number is GitHub's public count and deliberately excludes the
-mirror — hence "public contributions in {year}".
+A mirror's commits mostly don't appear in the public contributions calendar, so each ramp is scaled
+by quartiles over that mirror's *own* commit counts. Without that, every mirror day collapses to
+the palest shade. The headline number is GitHub's public count and deliberately excludes both
+mirrors — hence "public contributions in {year}". When a day has commits in more than one mirror,
+whichever accounts for at least half of that day's count wins the cell color, phia before ornn.
 
-Note the snapshot is public: it records which days had phia commits and how many.
+Note the snapshot is public: it records which days had phia/ornn commits and how many.
 
 ## Company logos
 

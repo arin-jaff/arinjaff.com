@@ -6,6 +6,9 @@ const GREEN = ["#d6e685", "#8cc665", "#44a340", "#1e6823"];
 // L* increments so no single shade dominates, and bottoming out at the same
 // lightness as classic green so neither ramp outweighs the other.
 const BLUE = ["#91ceff", "#70a1fa", "#1b7ee0", "#1559ad"];
+// Grey/black gradient reserved for the ornn work mirror. Same even-step
+// construction as blue, on a neutral ramp instead of a hue.
+const BLACK = ["#c2c2c2", "#949494", "#666666", "#383838"];
 
 const EMPTY = "var(--archive-empty-cell)";
 const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
@@ -17,12 +20,15 @@ const MONTHS = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "
 // the week that carries May 31 into June.
 const ANNOTATIONS = [{ label: "rowing national championships!", from: "05-18", to: "05-30" }];
 
-// ponytail: a day picks one side rather than splitting the cell — blue once the
-// mirror accounts for at least half of it. Split cells if mixed days matter.
+// ponytail: a day picks one side rather than splitting the cell — the first
+// mirror that accounts for at least half of it wins, phia before ornn. Split
+// cells if mixed days matter.
 function cellColor(day) {
   if (day.pad) return "transparent";
   if (!day.level) return EMPTY;
-  return (day.phia * 2 >= day.count ? BLUE : GREEN)[day.level - 1];
+  if (day.phia * 2 >= day.count) return BLUE[day.level - 1];
+  if (day.ornn * 2 >= day.count) return BLACK[day.level - 1];
+  return GREEN[day.level - 1];
 }
 
 function Ramp({ colors }) {
@@ -119,7 +125,8 @@ export default function ContributionsChart() {
                     day.pad
                       ? undefined
                       : `${day.count} contribution${day.count === 1 ? "" : "s"} on ${day.date}` +
-                        (day.phia ? ` · ${day.phia} in ${data.repo}` : "")
+                        (day.phia ? ` · ${day.phia} in ${data.repos.phia}` : "") +
+                        (day.ornn ? ` · ${day.ornn} in ${data.repos.ornn}` : "")
                   }
                   style={{ backgroundColor: cellColor(day) }}
                 />
@@ -156,6 +163,10 @@ export default function ContributionsChart() {
           <span className="label inline-flex items-center gap-2">
             <Ramp colors={BLUE} />
             phia
+          </span>
+          <span className="label inline-flex items-center gap-2">
+            <Ramp colors={BLACK} />
+            ornn
           </span>
         </div>
       </div>
