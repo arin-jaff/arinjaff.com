@@ -29,12 +29,28 @@ export const profile = {
   },
   experience: [
     {
+      company: "Ornn",
+      logo: "/logos/ornn.svg",
+      title: "Software Engineer",
+      summary: "Financial markets for compute: data platform, marketplace and agent surfaces",
+      location: "New York, NY",
+      period: "Jul 2026 — Present",
+      bullets: [
+        "Own the public MCP server behind data.ornn.com (OAuth-gated ChatGPT and Claude connectors for GPU pricing, forward curves and reliability data) plus the internal CRM/access MCP tooling staff use day to day.",
+        "Built the OEM and provider data-partnership intake pipeline: signed/bearer ingest API, partner upload portal, pull sources from provider rental endpoints, and a staff monitor with an index lab, all landing in a separate store.",
+        "Designed the access and trials engine for people and orgs: scheduled and custom-length trials, invite redemption, clamped API keys, a daily Slack trials digest, and CRM auto-approval with CAS-safe writes.",
+        "Hardened the product against a red-team pass: baseline security headers, CSRF and same-origin guards on mutating routes, Turnstile on sign-in, report-only CSP, redacted error bodies, and provenance stripped from everything the browser can fetch.",
+        "In Fabric, the GPU marketplace monorepo, shipped the GTM CRM across the Go commerce service, the Next.js staff console and the MCP/CLI surfaces: listings, threaded comments with mentions, owner filters and shareable customer links.",
+        "Wrote the hourly Open supply index for the broker scraper (stored table, automatic history rebuilds, per-GPU VRAM normalization, evidence hashes) and a worker that turns Gmail and Granola quotes into forward-curve data points."
+      ]
+    },
+    {
       company: "Phia",
       logo: "/logos/phia.svg",
       title: "Software Engineer, Core Platform",
       summary: "Translating business workflows into production AI systems",
       location: "New York, NY",
-      period: "Feb 2026 — Present",
+      period: "Feb 2026 — Jul 2026",
       bullets: [
         "Designed and launched the company's first MCP servers (Docker/Cloud Run, Terraform), connecting internal CRM and analytics databases to LLM agents with natural-language query, bulk-write, and reporting tooling.",
         "Formulated OAuth 2.1 authentication and routing conventions adopted by all internal agentic services.",
@@ -195,6 +211,7 @@ export const profile = {
     languages: [
       "Python",
       "TypeScript/JavaScript",
+      "Go",
       "SQL",
       "C/C++",
       "Rust",
@@ -206,7 +223,7 @@ export const profile = {
     mlAi: [
       "Anthropic/Claude API",
       "LLM Agent Pipelines",
-      "MCP Servers",
+      "MCP Servers (remote, OAuth-gated)",
       "PyTorch",
       "HuggingFace Transformers",
       "LoRA/QLoRA Fine-Tuning",
@@ -216,16 +233,19 @@ export const profile = {
     ],
     infrastructure: [
       "Next.js/React",
+      "Express",
       "FastAPI",
       "Flask",
-      "GCP (Cloud Run)",
+      "GCP (Cloud Run, Cloud SQL, Cloud Build)",
       "AWS (Lambda, S3, DynamoDB)",
       "Docker",
       "Terraform",
       "Redis",
-      "PostgreSQL (Supabase)",
+      "PostgreSQL (Supabase, sqlc)",
       "SQLite",
       "MongoDB",
+      "Sentry",
+      "Vitest",
       "Git",
       "CI/CD"
     ]

@@ -26,8 +26,8 @@ const ANNOTATIONS = [{ label: "rowing national championships!", from: "05-18", t
 function cellColor(day) {
   if (day.pad) return "transparent";
   if (!day.level) return EMPTY;
-  if (day.phia * 2 >= day.count) return BLUE[day.level - 1];
-  if (day.ornn * 2 >= day.count) return BLACK[day.level - 1];
+  if (day.phia && day.phia * 2 >= day.count) return BLUE[day.level - 1];
+  if (day.ornn && day.ornn * 2 >= day.count) return BLACK[day.level - 1];
   return GREEN[day.level - 1];
 }
 

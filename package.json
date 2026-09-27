@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "contributions": "node scripts/fetch-contributions.mjs",
+    "contributions": "GITHUB_TOKEN=${GITHUB_TOKEN:-$(gh auth token -u arin-jaff)} ORNN_TOKEN=${ORNN_TOKEN:-$(gh auth token -u arin-ornn)} node scripts/fetch-contributions.mjs",
     "format": "prettier --write ."
   },
   "dependencies": {

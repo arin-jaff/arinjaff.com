@@ -43,7 +43,7 @@ export default function Skills() {
       <div className="max-w-3xl">
         <p className="mb-12 text-sm leading-relaxed text-muted-foreground">
           My technical skills have been developed through rigorous Computer Science coursework at
-          Columbia University, hands-on experience building production AI systems at Phia, software
+          Columbia University, hands-on experience building production data platforms and AI systems at Ornn and Phia, software
           engineering internships at Garmin and Covet, and through developing several applications. I
           have gained expertise in full-stack development, cloud computing, and AI/ML through both
           academic study and real-world application building production systems.

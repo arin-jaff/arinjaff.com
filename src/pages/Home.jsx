@@ -16,7 +16,7 @@ const index = [
 ];
 
 // Pulled from the resume data so the two can't drift apart.
-const current = profile.experience.find((item) => item.company === "Phia");
+const current = profile.experience[0];
 
 const rowClass =
   "group grid grid-cols-[34px_1fr_auto] items-center gap-3 py-3.5 transition-colors hover:bg-paper-deep";
@@ -123,8 +123,9 @@ export default function Home() {
               real-world problems.
             </p>
             <p>
-              I am a Software Engineer on the Core Platform team at Phia, where I build MCP servers
-              and the AI tooling around them. I hold a Computer Science degree from Columbia
+              I am a Software Engineer at Ornn, building financial markets for compute: the GPU
+              pricing data platform, its public MCP server, and the marketplace's CRM. Before that I
+              built MCP servers and the AI tooling around them on Phia's Core Platform team. I hold a Computer Science degree from Columbia
               University, where I focused on machine learning, artificial intelligence, and cloud
               computing.
             </p>

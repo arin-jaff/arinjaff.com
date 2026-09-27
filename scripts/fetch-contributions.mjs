@@ -3,17 +3,16 @@
 //
 // Day totals come from scraping GitHub's own contributions calendar — the same
 // source sallar/github-contributions-chart uses. Per-day commit counts for work
-// mirrors come from either the REST API (a private mirror repo) or `git log` on
-// a local clone, so those days can be tinted instead of green.
+// mirrors come from the REST API, so those days can be tinted instead of green.
 //
-// Usage:  npm run contributions
-//   GITHUB_USER      profile to chart          (default: arin-jaff)
-//   PHIA_REPO        owner/name of the mirror  (default: <user>/phia-work-mirror)
-//   GITHUB_TOKEN     required only if PHIA_REPO is private (`gh auth token`)
-//   ORNN_LOCAL_REPOS comma-separated local clones to scan  (default: ornn-data, fabric)
-//   ORNN_AUTHOR      git log --author filter for those clones (default: arin@ornn.com)
+// Usage:  npm run contributions   (pulls both tokens from `gh auth token`)
+//   GITHUB_USER   profile to chart                       (default: arin-jaff)
+//   PHIA_REPO     owner/name of the phia mirror          (default: <user>/phia-work-mirror)
+//   GITHUB_TOKEN  token that can see PHIA_REPO           (gh auth token -u arin-jaff)
+//   ORNN_ORG      GitHub org whose repos count as ornn   (default: Ornn-AI)
+//   ORNN_AUTHOR   commit author login inside that org    (default: arin-ornn)
+//   ORNN_TOKEN    token belonging to that author         (gh auth token -u arin-ornn)
 
-import { execFileSync } from "node:child_process";
 import { writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,18 +21,17 @@ const USER = process.env.GITHUB_USER ?? "arin-jaff";
 const TOKEN = process.env.GITHUB_TOKEN;
 const OUT = resolve(dirname(fileURLToPath(import.meta.url)), "../public/contributions.json");
 
-const ORNN_ROOT = "/Users/arinjaff/Documents/gh_repos/arin-ornn";
-
 // Each mirror tints its majority days with its own ramp — see ContributionsChart.
-// phia comes from a private GitHub mirror repo; ornn has no mirror, so it's read
-// straight out of local clones by author email instead.
+// phia is a single private mirror repo under the personal account; ornn is every
+// repo in the company org, filtered to the work account's commits, read with
+// that account's own token.
 const MIRRORS = [
-  { key: "phia", source: "github", repo: process.env.PHIA_REPO ?? `${USER}/phia-work-mirror` },
+  { key: "phia", repo: process.env.PHIA_REPO ?? `${USER}/phia-work-mirror`, token: TOKEN },
   {
     key: "ornn",
-    source: "local",
-    paths: (process.env.ORNN_LOCAL_REPOS ?? `${ORNN_ROOT}/ornn-data,${ORNN_ROOT}/fabric`).split(","),
-    author: process.env.ORNN_AUTHOR ?? "arin@ornn.com"
+    org: process.env.ORNN_ORG ?? "Ornn-AI",
+    author: process.env.ORNN_AUTHOR ?? "arin-ornn",
+    token: process.env.ORNN_TOKEN
   }
 ];
 
@@ -66,61 +64,49 @@ async function calendarYear(year) {
   return days;
 }
 
-async function mirrorCommitsByDay(repo) {
-  const perDay = new Map();
+// Walks a paginated GitHub REST listing. A 404 warns and yields nothing rather
+// than throwing: GitHub returns 404, not 403, for private things you cannot
+// see, so a token that lacks access looks identical to a missing resource.
+// 409 is an empty repo, which is nothing to warn about.
+async function* paged(url, token) {
   const headers = {
     accept: "application/vnd.github+json",
-    ...(TOKEN ? { authorization: `Bearer ${TOKEN}` } : {})
+    ...(token ? { authorization: `Bearer ${token}` } : {})
   };
-
-  let url = `https://api.github.com/repos/${repo}/commits?per_page=100`;
   while (url) {
     const res = await fetch(url, { headers });
+    if (res.status === 409) return;
     if (res.status === 404) {
-      // GitHub returns 404 rather than 403 for private repos you cannot see,
-      // so a token that lacks access looks identical to a missing repo.
-      console.warn(
-        `! ${repo} not reachable — every day stays green.\n  ` +
-          (TOKEN
-            ? "The token authenticated, but this account cannot see that repo. Use a token from the account that owns it."
-            : "If the repo is private, pass a token: GITHUB_TOKEN=$(gh auth token) npm run contributions")
-      );
-      return perDay;
+      console.warn(`! ${url.split("?")[0]} not reachable — use a token from an account that can see it.`);
+      return;
     }
-    if (!res.ok) throw new Error(`commits: HTTP ${res.status} ${await res.text()}`);
+    if (!res.ok) throw new Error(`${url}: HTTP ${res.status} ${await res.text()}`);
+    yield* await res.json();
+    url = nextPage(res.headers.get("link"));
+  }
+}
 
-    for (const commit of await res.json()) {
+// Per-day commit counts on each repo's default branch, optionally filtered to
+// one author login.
+async function mirrorCommitsByDay({ repos, author, token }) {
+  const perDay = new Map();
+  for (const repo of repos) {
+    const query = author ? `&author=${author}` : "";
+    for await (const commit of paged(`https://api.github.com/repos/${repo}/commits?per_page=100${query}`, token)) {
       const date = (commit.commit?.author?.date ?? commit.commit?.committer?.date ?? "").slice(0, 10);
       if (date) perDay.set(date, (perDay.get(date) ?? 0) + 1);
     }
-    url = nextPage(res.headers.get("link"));
   }
   return perDay;
 }
 
-// Counts commits by day straight from a local clone — no mirror repo, no
-// token, just `git log` filtered to one author across every branch. A missing
-// clone (wrong machine, moved checkout) warns and contributes 0 rather than
-// failing the whole script — same posture as a 404 on a GitHub mirror.
-function localCommitsByDay({ paths, author }) {
-  const perDay = new Map();
-  for (const path of paths) {
-    let out;
-    try {
-      out = execFileSync(
-        "git",
-        ["log", "--all", `--author=${author}`, "--date=short", "--format=%ad"],
-        { cwd: path, encoding: "utf8" }
-      );
-    } catch (err) {
-      console.warn(`! ${path} not readable — contributes 0 commits.\n  ${err.message.split("\n")[0]}`);
-      continue;
-    }
-    for (const date of out.split("\n").filter(Boolean)) {
-      perDay.set(date, (perDay.get(date) ?? 0) + 1);
-    }
+async function orgRepos(org, token) {
+  const names = [];
+  for await (const repo of paged(`https://api.github.com/orgs/${org}/repos?per_page=100&type=all`, token)) {
+    names.push(repo.full_name);
   }
-  return perDay;
+  if (!names.length) console.warn(`! no repos visible in ${org} — is ORNN_TOKEN from a member account?`);
+  return names;
 }
 
 // A private mirror's commits are usually missing from the public calendar, so
@@ -158,10 +144,9 @@ for (const year of years) {
 
 const mirrors = await Promise.all(
   MIRRORS.map(async (m) => {
-    const counts =
-      m.source === "local" ? localCommitsByDay(m) : await mirrorCommitsByDay(m.repo);
-    const label = m.source === "local" ? m.paths.map((p) => p.split("/").at(-1)).join(" + ") : m.repo;
-    return { ...m, counts, label, level: levelFor(counts) };
+    const repos = m.repo ? [m.repo] : await orgRepos(m.org, m.token);
+    const counts = await mirrorCommitsByDay({ ...m, repos });
+    return { ...m, counts, label: m.repo ?? m.org, level: levelFor(counts) };
   })
 );
 const today = iso(new Date());

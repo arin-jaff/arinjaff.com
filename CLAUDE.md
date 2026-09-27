@@ -45,26 +45,27 @@ isn't. Don't delete projects to match it.
 
 `ContributionsChart` reads `public/contributions.json`, a snapshot committed to the repo. Classic
 GitHub green for personal work; **blue for commits in `arin-jaff/phia-work-mirror`** (private);
-**grey/black for Ornn commits**, read straight from local clones instead of a mirror repo (Ornn's
-own repos are private company repos `arin-jaff` has no GitHub-visible mirror of).
-`scripts/fetch-contributions.mjs` drives both sources off one `MIRRORS` array — a third source is
-a one-line addition there plus a new ramp + legend entry in `ContributionsChart`.
+**grey/black for `arin-ornn`'s commits across every repo in the `Ornn-AI` org** (private company
+repos, read with that account's own token). `scripts/fetch-contributions.mjs` drives both sources
+off one `MIRRORS` array — a mirror is either one `repo` or an `org` + `author` — so a third source
+is a one-line addition there plus a new ramp + legend entry in `ContributionsChart`.
 
 ```
-GITHUB_TOKEN=$(gh auth token -u arin-jaff) npm run contributions
+npm run contributions
 ```
 
-phia's token must belong to **`arin-jaff`** — `arin-phia` and `arin-ornn` get a 404, and GitHub
-returns 404 (not 403) for private repos an account can't see, so an access failure looks identical
-to a missing repo. No special scope is needed beyond read access to the mirror repo (classic PAT
-`repo` scope, or fine-grained Contents: Read-only). Override the default with `PHIA_REPO` if it
-doesn't live under `arin-jaff`.
+The npm script pulls both tokens from `gh auth token -u arin-jaff` / `-u arin-ornn`, so both
+accounts must be logged into `gh` (`gh auth status`). Set `GITHUB_TOKEN` / `ORNN_TOKEN` to
+override. phia's token must belong to **`arin-jaff`** — `arin-phia` and `arin-ornn` get a 404, and
+GitHub returns 404 (not 403) for private repos an account can't see, so an access failure looks
+identical to a missing repo. No special scope is needed beyond read access (classic PAT `repo`
+scope, or fine-grained Contents: Read-only). Override the default with `PHIA_REPO` if it doesn't
+live under `arin-jaff`.
 
-ornn needs no token or mirror repo at all: `localCommitsByDay` runs `git log --all --author=…` on
-local clones (default `~/Documents/gh_repos/arin-ornn/{ornn-data,fabric}`, override with
-`ORNN_LOCAL_REPOS` — comma-separated paths — and `ORNN_AUTHOR`). This only works on a machine that
-has those clones checked out; running from anywhere else just warns and gets a 0-commit ornn source
-instead of failing the whole script.
+ornn counts commits on each repo's **default branch** only (the REST commits endpoint), filtered
+by `author=arin-ornn`, so unmerged branch work doesn't show until it lands. Empty repos (409) are
+skipped silently; unreachable ones warn and contribute 0. `ORNN_ORG` / `ORNN_AUTHOR` override the
+defaults.
 
 The calendar is year-to-date: 1 January through today, with blank cells padding the first week
 so 1 January lands on its real weekday.
